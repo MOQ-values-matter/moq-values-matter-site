@@ -1,0 +1,160 @@
+---
+title: <Value Pattern Name>
+atlas_id: VA-XXX
+status: Draft
+primary_level: <physical | biological | social | intellectual>
+secondary_levels: []
+version: 1.0
+---
+
+## 1. Neutral Definition
+
+Provide a concise, non-normative description of the value pattern.
+
+This section should describe *what the pattern is*, how it typically manifests, and how it can be distinguished from adjacent or similar patterns.
+
+- No moral judgment
+- No prescriptions
+- No advocacy
+- Observable characteristics only
+
+---
+
+## 2. Multi-Level Evaluation (0–2 per level)
+
+Assess the functional contribution of the pattern at each MOQ level.
+
+**Scoring scale**
+- 0 = No meaningful contribution or net negative
+- 1 = Conditional or mixed contribution
+- 2 = Strong, stabilizing contribution
+
+### Physical — <0 | 1 | 2>
+Brief justification.
+
+### Biological — <0 | 1 | 2>
+Brief justification.
+
+### Social — <0 | 1 | 2>
+Brief justification.
+
+### Intellectual — <0 | 1 | 2>
+Brief justification.
+
+---
+
+## 3. Multi-Level Coherence Analysis
+
+Analyze how the pattern interacts across MOQ levels.
+
+Address explicitly:
+- Which level(s) the pattern primarily serves
+- Where it generates cross-level resonance
+- Where it introduces tension or suppression
+- Conditions under which coherence strengthens or degrades
+
+This section explains *how* value is generated or lost across levels.
+
+---
+
+## 4. Relational Impact Map
+
+Describe how the pattern affects different relational positions.
+
+### Allies
+How those aligned with the pattern are affected.
+
+### Neutrals
+How observers or indirectly involved parties experience the pattern.
+
+### Adversaries
+How those opposed to or threatened by the pattern are affected.
+
+### Internal POV Group
+How the pattern shapes incentives, perception, and behavior for those operating within it.
+
+---
+
+## 5. Persistence Logic
+
+Explain why this pattern persists across time, cultures, or systems.
+
+Possible drivers include:
+- Evolutionary
+- Biological
+- Social
+- Cognitive
+- Institutional
+- Technological
+
+Identify:
+- Reinforcing mechanisms
+- Stabilizing feedback loops
+- Conditions under which persistence weakens or collapses
+
+Persistence does not imply legitimacy.
+
+---
+
+## 6. Empirical Evidence
+
+Ground the analysis in observable reality.
+
+Reference relevant evidence from domains such as:
+- Anthropology
+- Psychology
+- Sociology
+- History
+- Behavioral economics
+- Biology
+- Political science
+- Contemporary institutions
+
+Evidence may be qualitative or quantitative.
+Speculative claims must be clearly marked.
+
+---
+
+## 7. MoQ Coherence Verdict
+
+Provide a synthesized functional judgment of the pattern.
+
+Address explicitly:
+- Overall coherence across MOQ levels
+- Primary alignment or conflict zones
+- Relationship to Dynamic Quality (facilitative or suppressive)
+- Conditions under which the pattern becomes:
+  - High-value
+  - Low-value
+  - Degenerative
+
+This is the only evaluative section.
+
+---
+
+## 8. Summary Schema
+
+Provide a compact, standardized summary for cross-atlas comparison.
+
+- Primary MOQ level:
+- Typical score profile:
+- Coherence type: <resonant | mixed | conflicting>
+- Persistence drivers:
+- Common failure mode:
+- Related patterns: (internal links)
+
+---
+
+## Canon Status & Revision Notes
+
+**Current status:** Draft
+
+### Revision History
+- YYYY-MM-DD — Initial draft
+
+---
+
+## Canon Declaration (required for Canon status only)
+
+> **Canon Declaration:**  
+> This entry has been evaluated against the Canon Promotion Checklist (v1) and is designated Canon on the basis of intellectual coherence, cross-level integrity, empirical grounding, and explanatory stability under current conditions.
