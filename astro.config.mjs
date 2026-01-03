@@ -6,19 +6,26 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: 'MOQ Values Matter',
+			social: [
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/moq-values-matter/moq-values-matter-site',
+				},
+			],
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
+					label: 'Fundamentals',
+					autogenerate: { directory: 'fundamentals' },
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Value Atlas',
+					autogenerate: { directory: 'atlas' },
+				},
+				{
+					label: 'Essays',
+					autogenerate: { directory: 'essays' },
 				},
 			],
 		}),
