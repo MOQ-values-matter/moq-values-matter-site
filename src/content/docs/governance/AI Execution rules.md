@@ -198,6 +198,14 @@ meaning-binding
 
 They do not describe justice or truth.
 
+## Canon Cluster Rules
+
+Canon cluster pages must:
+- reference only Canon entries (no Draft clustering)
+- introduce no new patterns or evaluative claims
+- preserve MOQ hierarchy and boundary discipline
+- be updated only to maintain accuracy if linked Canon entries change
+
 Visuals and Diagrams
 AI assistants may:
 
@@ -251,6 +259,8 @@ Fundamental laws are Canon-grade
 
 Canon changes require explicit scrutiny
 
+- `fundamentals/clusters/` — Canon cluster pages (relationships between Canon entries only; no new claims)
+
 Relationship to Other Governance Files
 This document must remain consistent with:
 
@@ -270,3 +280,6 @@ When acting as an AI assistant in this repository:
 Preserve stability first.
 Invite Dynamic Quality second.
 Never collapse the hierarchy.
+
+See also:
+- `src/content/docs/fundamentals/clusters/index.mdx` — Canon cluster rules and criteria

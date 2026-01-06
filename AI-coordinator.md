@@ -31,10 +31,12 @@ Content root:
 
 Primary sections:
 - `fundamentals/` — foundational reference (laws, frameworks, definitions)
+	- `fundamentals/clusters/` — Canon cluster pages that organize relationships between existing Canon patterns (structural glue; no new claims)
 - `atlas/` — Canon value pattern entries (structured analysis)
 - `essays/` — exploratory synthesis, commentary, narrative
 - `methods/` — analytical methods, tools, templates (optional / later)
 - `governance/` — rules for Canon, revision discipline, scope boundaries
+
 
 Recommended law paths:
 - `src/content/docs/fundamentals/laws/physical.mdx`
@@ -42,6 +44,12 @@ Recommended law paths:
 - `src/content/docs/fundamentals/laws/social.mdx`
 - `src/content/docs/fundamentals/laws/intellectual.mdx`
 - `src/content/docs/fundamentals/laws/index.mdx`
+
+
+Recommended cluster paths:
+- `src/content/docs/fundamentals/clusters/index.mdx`
+- `src/content/docs/fundamentals/clusters/myth-integrity-deception-truth.mdx`
+
 
 ---
 
@@ -55,10 +63,15 @@ Canon content must be:
 - revision-controlled
 - minimally stylistic (no rhetorical inflation)
 
+
+
 Canon content typically includes:
 - `fundamentals/laws/*`
 - `atlas/*` entries that have passed Canon promotion
 - governance files and checklists
+
+- Canon clusters are organizational synthesis only; they must not introduce new patterns or claims.
+
 
 ### 4.2 Essays (Exploratory, not Canon by default)
 Essays may:

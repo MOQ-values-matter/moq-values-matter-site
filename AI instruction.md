@@ -30,6 +30,9 @@ AI assistants must align with the following governance documents:
   Defines the criteria required for promoting a Value Atlas entry to Canon.  
   → src/content/docs/governance/canon-promotion-checklist.mdx
 
+See also:
+- `src/content/docs/fundamentals/clusters/index.mdx` — Canon cluster rules and criteria
+
 If instructions conflict, Canon Governance takes precedence.
 
 ---
@@ -77,6 +80,33 @@ When working with Value Atlas entries, AI assistants must:
   - analysis
   - evidence
   - verdict
+
+## Canon Clusters (Structural Pages)
+
+Canon clusters are structural reference pages that organize relationships between existing Canon value patterns.
+
+Clusters must:
+- reference only Canon entries (no Draft clustering)
+- describe relationships only (no new patterns, no reinterpretations)
+- preserve MOQ hierarchy and boundaries
+- introduce zero new evaluative claims
+- remain stable; updates allowed only to restore accuracy if linked Canon entries change
+
+### When a New Cluster Is Justified
+A new Canon cluster is justified only when existing Canon entries exhibit a stable, recurring structural relationship that cannot be captured clearly via cross-links alone.
+
+A cluster may be created only if:
+1) it references two or more Canon entries  
+2) it introduces no new claims  
+3) it resolves recurring structural ambiguity  
+4) it preserves MOQ boundaries  
+5) it is entirely traceable to existing Canon text
+
+Cluster pages belong under:
+- `src/content/docs/fundamentals/clusters/`
+
+They must not be placed under essays/articles.
+
 
 AI assistants must not invent alternative templates or reorder canonical sections.
 
