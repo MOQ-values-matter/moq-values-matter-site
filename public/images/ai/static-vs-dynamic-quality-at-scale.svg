@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <ns0:defs>
+    <ns0:linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <ns0:stop offset="0%" stop-color="#05060b" />
+      <ns0:stop offset="100%" stop-color="#0b1020" />
+    </ns0:linearGradient>
+    <ns0:linearGradient id="neon" x1="0" y1="0" x2="1" y2="0">
+      <ns0:stop offset="0%" stop-color="#00e5ff" />
+      <ns0:stop offset="50%" stop-color="#a855f7" />
+      <ns0:stop offset="100%" stop-color="#ff4fd8" />
+    </ns0:linearGradient>
+    <ns0:linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <ns0:stop offset="0%" stop-color="#0c1328" stop-opacity="0.92" />
+      <ns0:stop offset="100%" stop-color="#0a1021" stop-opacity="0.92" />
+    </ns0:linearGradient>
+
+    <ns0:filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <ns0:feGaussianBlur stdDeviation="6" result="b" />
+      <ns0:feColorMatrix in="b" type="matrix" values="1 0 0 0 0                 0 1 0 0 0                 0 0 1 0 0                 0 0 0 0.75 0" result="g" />
+      <ns0:feMerge>
+        <ns0:feMergeNode in="g" />
+        <ns0:feMergeNode in="SourceGraphic" />
+      </ns0:feMerge>
+    </ns0:filter>
+
+    <ns0:filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <ns0:feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.55" />
+    </ns0:filter>
+
+    <ns0:style>
+      .h1{font: 700 36px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; fill:#e9ecff;}
+      .h2{font: 650 20px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; fill:#e9ecff;}
+      .p{font: 500 16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; fill:#c7cff8; opacity:0.95;}
+      .muted{fill:#a9b5ee; opacity:0.9;}
+      .ring{fill:none; stroke:url(#neon); stroke-width:3; opacity:0.85;}
+      .ringSoft{fill:none; stroke:url(#neon); stroke-width:2; opacity:0.35;}
+      .ringDash{fill:none; stroke:url(#neon); stroke-width:3; stroke-dasharray:10 12; opacity:0.85;}
+      .divider{stroke:#1c2750; stroke-width:2; opacity:0.85;}
+      .node{fill:#0f1a38; stroke:url(#neon); stroke-width:2; opacity:0.95;}
+      .nodeLite{fill:#0f1a38; stroke:#6bbcff; stroke-width:2; opacity:0.75;}
+      .ai{fill:#0b1022; stroke:url(#neon); stroke-width:2.5; rx:12; ry:12;}
+      .aiLite{fill:#0b1022; stroke:#ff4fd8; stroke-width:2; opacity:0.85; rx:12; ry:12;}
+      .line{stroke:#7aa2ff; stroke-width:2; opacity:0.35;}
+      .lineHot{stroke:url(#neon); stroke-width:3; opacity:0.7;}
+      .label{font: 700 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; fill:#e9ecff;}
+      .tag{font: 650 13px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; fill:#0b1022;}
+      .chip{fill:url(#neon); opacity:0.95;}
+    
+      .small{font-size:14px;}
+</ns0:style>
+  </ns0:defs>
+
+  <ns0:rect width="1600" height="900" fill="url(#bg)" />
+
+  <ns0:text x="80" y="88" class="h1">Static vs Dynamic Quality at Scale</ns0:text>
+  <ns0:text x="80" y="122" class="p muted">How AI &amp; automation harden static patterns — and how Dynamic Quality survives (or collapses).</ns0:text>
+
+  <ns0:g filter="url(#shadow)">
+    <ns0:rect x="80" y="160" width="700" height="660" rx="26" fill="url(#card)" stroke="#1c2750" stroke-width="2" />
+    <ns0:rect x="820" y="160" width="700" height="660" rx="26" fill="url(#card)" stroke="#1c2750" stroke-width="2" />
+  </ns0:g>
+
+  <ns0:g>
+    <ns0:circle cx="118" cy="206" r="8" fill="#00e5ff" opacity="0.95" />
+    <ns0:text x="140" y="212" class="h2">Resonant scale (space for Dynamic Quality)</ns0:text>
+
+    <ns0:circle cx="858" cy="206" r="8" fill="#ff4fd8" opacity="0.95" />
+    <ns0:text x="880" y="212" class="h2">Rigid scale (static domination)</ns0:text>
+  </ns0:g>
+
+  
+  <ns0:g transform="translate(0,70)">
+    <ns0:circle cx="430" cy="470" r="22" fill="url(#neon)" filter="url(#glow)" />
+    <ns0:text x="430" y="512" text-anchor="middle" class="label">Dynamic Quality</ns0:text>
+
+    <ns0:circle cx="430" cy="470" r="70" class="ringDash" stroke-linecap="round" />
+    <ns0:circle cx="430" cy="470" r="120" class="ringDash" stroke-linecap="round" opacity="0.65" />
+    <ns0:circle cx="430" cy="470" r="175" class="ringDash" stroke-linecap="round" opacity="0.5" />
+    <ns0:circle cx="430" cy="470" r="230" class="ringSoft" stroke-linecap="round" />
+
+    <ns0:g class="p">
+      <ns0:text x="430" y="372" text-anchor="middle">Static patterns (adaptive)</ns0:text>
+      <ns0:text x="430" y="392" text-anchor="middle" class="muted">structured, but corrigible</ns0:text>
+    </ns0:g>
+
+    <ns0:g>
+      <ns0:path d="M430 448 C410 410, 360 390, 320 368" fill="none" class="lineHot" />
+      <ns0:circle cx="316" cy="366" r="5" fill="#00e5ff" />
+      <ns0:text x="250" y="356" class="p muted">breakthrough</ns0:text>
+
+      <ns0:path d="M446 458 C490 430, 520 395, 560 360" fill="none" class="lineHot" opacity="0.55" />
+      <ns0:circle cx="564" cy="358" r="5" fill="#a855f7" />
+      <ns0:text x="566" y="346" class="p muted">variation</ns0:text>
+    </ns0:g>
+
+    <ns0:g>
+      <ns0:circle cx="250" cy="610" r="16" class="node" />
+      <ns0:circle cx="330" cy="650" r="16" class="node" />
+      <ns0:circle cx="420" cy="640" r="16" class="node" />
+      <ns0:circle cx="520" cy="650" r="16" class="node" />
+      <ns0:circle cx="610" cy="610" r="16" class="node" />
+
+      <ns0:path d="M250 610 L330 650 L420 640 L520 650 L610 610" class="line" fill="none" />
+      <ns0:path d="M330 650 L520 650" class="line" fill="none" />
+      <ns0:path d="M420 640 L430 520" class="lineHot" fill="none" opacity="0.35" />
+
+      <ns0:text x="430" y="706" text-anchor="middle" class="p muted">Scale stays plural • feedback stays human • correction remains possible</ns0:text>
+    </ns0:g>
+
+    <ns0:g>
+      <ns0:rect x="188" y="520" width="120" height="44" class="ai" opacity="0.75" />
+      <ns0:text x="248" y="548" text-anchor="middle" class="label" font-size="13">AI assistants</ns0:text>
+
+      <ns0:rect x="552" y="520" width="120" height="44" class="ai" opacity="0.75" />
+      <ns0:text x="612" y="548" text-anchor="middle" class="label" font-size="13">Automation</ns0:text>
+
+      <ns0:path d="M308 542 L390 520" class="line" fill="none" />
+      <ns0:path d="M552 542 L470 520" class="line" fill="none" />
+    </ns0:g>
+
+    <ns0:g transform="translate(120,210)">
+      <ns0:rect x="0" y="0" width="620" height="120" rx="18" fill="#0b1022" opacity="0.55" stroke="#1c2750" stroke-width="2" />
+      <ns0:text x="22" y="34" class="label">Pattern: Static supports Dynamic</ns0:text>
+      <ns0:text x="22" y="62" class="p small">• Friction exists where it protects meaning (deliberation, craft, consent).</ns0:text>
+      <ns0:text x="22" y="86" class="p small">• Rules are corrigible; exceptions can reveal higher-quality paths.</ns0:text>
+      <ns0:text x="22" y="110" class="p small">• Optimization serves judgment (not the other way around).</ns0:text>
+    </ns0:g>
+  </ns0:g>
+
+  
+  <ns0:g transform="translate(0,70)">
+    <ns0:rect x="1120" y="408" width="160" height="124" class="ai" filter="url(#glow)" />
+    <ns0:text x="1200" y="438" text-anchor="middle" class="label">STATIC</ns0:text>
+    <ns0:text x="1200" y="458" text-anchor="middle" class="label">CONFIG</ns0:text>
+    <ns0:text x="1200" y="498" text-anchor="middle" class="p muted">frozen hierarchy</ns0:text>
+
+    <ns0:circle cx="1200" cy="470" r="78" class="ring" />
+    <ns0:circle cx="1200" cy="470" r="132" class="ring" opacity="0.75" />
+    <ns0:circle cx="1200" cy="470" r="190" class="ring" opacity="0.6" />
+    <ns0:circle cx="1200" cy="470" r="248" class="ring" opacity="0.35" />
+
+    <ns0:text x="1200" y="365" text-anchor="middle" class="p muted">Static patterns (hardened)</ns0:text>
+    <ns0:text x="1200" y="386" text-anchor="middle" class="p muted">variance treated as error</ns0:text>
+
+    <ns0:g>
+      <ns0:circle cx="1200" cy="260" r="10" fill="#ff4fd8" filter="url(#glow)" />
+      <ns0:text x="1200" y="240" text-anchor="middle" class="label">Policy / Enforcement</ns0:text>
+      <ns0:circle cx="1200" cy="260" r="36" class="ringSoft" opacity="0.6" />
+      <ns0:circle cx="1200" cy="260" r="64" class="ringSoft" opacity="0.35" />
+      <ns0:path d="M1200 296 L1200 390" class="lineHot" fill="none" opacity="0.6" />
+    </ns0:g>
+
+    <ns0:g>
+      <ns0:circle cx="1020" cy="610" r="16" class="nodeLite" />
+      <ns0:circle cx="1100" cy="650" r="16" class="nodeLite" />
+      <ns0:circle cx="1200" cy="640" r="16" class="nodeLite" />
+      <ns0:circle cx="1300" cy="650" r="16" class="nodeLite" />
+      <ns0:circle cx="1380" cy="610" r="16" class="nodeLite" />
+
+      <ns0:path d="M1020 610 L1100 650 L1200 640 L1300 650 L1380 610" class="line" fill="none" opacity="0.55" />
+      <ns0:path d="M1200 640 L1200 532" class="lineHot" fill="none" opacity="0.7" />
+
+      <ns0:circle cx="1100" cy="650" r="28" class="ringSoft" opacity="0.45" />
+      <ns0:circle cx="1100" cy="650" r="44" class="ringSoft" opacity="0.25" />
+      <ns0:circle cx="1300" cy="650" r="28" class="ringSoft" opacity="0.45" />
+      <ns0:circle cx="1300" cy="650" r="44" class="ringSoft" opacity="0.25" />
+
+      <ns0:text x="1200" y="706" text-anchor="middle" class="p muted">Scale becomes monoculture • feedback becomes compliance • correction is delayed</ns0:text>
+    </ns0:g>
+
+    <ns0:g>
+      <ns0:rect x="930" y="520" width="140" height="44" class="aiLite" />
+      <ns0:text x="1000" y="548" text-anchor="middle" class="label" font-size="13">Robotics</ns0:text>
+
+      <ns0:rect x="1330" y="520" width="160" height="44" class="aiLite" />
+      <ns0:text x="1410" y="548" text-anchor="middle" class="label" font-size="13">Surveillance</ns0:text>
+
+      <ns0:path d="M1070 542 L1118 520" class="line" fill="none" opacity="0.55" />
+      <ns0:path d="M1330 542 L1282 520" class="line" fill="none" opacity="0.55" />
+    </ns0:g>
+
+    <ns0:g transform="translate(860,210)">
+      <ns0:rect x="0" y="0" width="620" height="120" rx="18" fill="#0b1022" opacity="0.55" stroke="#1c2750" stroke-width="2" />
+      <ns0:text x="22" y="34" class="label">Pattern: Static replaces Dynamic</ns0:text>
+      <ns0:text x="22" y="62" class="p small">• Friction is treated as waste (hesitation, craft, dissent).</ns0:text>
+      <ns0:text x="22" y="86" class="p small">• Deviation becomes error; correction serves the config.</ns0:text>
+      <ns0:text x="22" y="110" class="p small">• Optimization becomes authority (meaning is procedural).</ns0:text>
+    </ns0:g>
+  </ns0:g>
+
+  
+  <ns0:g filter="url(#shadow)">
+    <ns0:rect x="80" y="836" width="1440" height="44" rx="16" fill="#0b1022" opacity="0.65" stroke="#1c2750" stroke-width="2" />
+    <ns0:rect x="96" y="846" width="142" height="24" rx="12" class="chip" />
+    <ns0:text x="167" y="863" text-anchor="middle" class="tag">VALUES MATTER</ns0:text>
+    <ns0:text x="270" y="863" class="p">At scale, frozen value hierarchies become infrastructure — and Dynamic Quality has fewer places to break through.</ns0:text>
+  </ns0:g>
+</ns0:svg>
