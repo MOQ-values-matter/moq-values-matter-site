@@ -4,7 +4,7 @@ import starlight from "@astrojs/starlight";
 
 export default defineConfig({
   site: "https://moq-values-matter.github.io",
-  base: "/moq-values-matter-site",
+  base: "/moq-values-matter-site/",
   integrations: [
     starlight({
       title: "MOQ Values Matter",
