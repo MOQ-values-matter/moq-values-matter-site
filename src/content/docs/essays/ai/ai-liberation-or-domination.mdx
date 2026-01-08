@@ -8,7 +8,16 @@ description: "How the same AI technology can empower humans—or take control. V
 
 > **Values matter.**
 
-![AI: Liberation vs Domination — diagram](/images/ai/ai-liberation-vs-domination.svg)
+{(() => {
+  const withBase = (p) => `${import.meta.env.BASE_URL}${p.replace(/^\//, "")}`;
+  return (
+    <img
+      src={withBase("images/ai/ai-liberation-vs-domination.svg")}
+      alt="AI: Liberation vs Domination"
+      style={{ width: "100%", maxWidth: "1200px", margin: "2rem auto", display: "block" }}
+    />
+  );
+})()}
 
 *(How to read this essay: the numbered callouts [①–⑧] correspond to visible elements in the diagram. Read the paragraph, then glance at the matching element.)*
 
