@@ -168,11 +168,17 @@ Values matter.
 
 ---
 
+export const base = import.meta.env.BASE_URL;
+
 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4rem" }}>
   <div>
-    <!-- Previous link here -->
+    <a href={`${base}essays/language/why-this-matters-now/`}>
+      ← Why This Matters Now
+    </a>
   </div>
   <div>
-    <!-- Next link here -->
+    <a href={`${base}essays/language/`}>
+      Back to series index →
+    </a>
   </div>
 </div>

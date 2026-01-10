@@ -214,11 +214,17 @@ In the next essay we turn from foundations to function: language in a value-cent
 
 ---
 
+export const base = import.meta.env.BASE_URL;
+
 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4rem" }}>
   <div>
-    <!-- Previous link here -->
+    <a href={`${base}essays/language/the-missing-foundation-why-language-cannot-ground-itself/`}>
+      ← The Missing Foundation
+    </a>
   </div>
   <div>
-    <!-- Next link here -->
+    <a href={`${base}essays/language/language-in-a-value-centered-universe/`}>
+      Next: Language in a Value-Centered Universe →
+    </a>
   </div>
 </div>

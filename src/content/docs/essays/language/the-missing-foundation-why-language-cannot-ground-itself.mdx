@@ -165,13 +165,17 @@ Understanding what it is tethered to is the necessary next step.
 
 ---
 
----
+export const base = import.meta.env.BASE_URL;
 
 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4rem" }}>
   <div>
-    <!-- Previous link here -->
+    <a href={`${base}essays/language/why-the-linguistic-turn-failed/`}>
+      ← Why the Linguistic Turn Failed
+    </a>
   </div>
   <div>
-    <!-- Next link here -->
+    <a href={`${base}essays/language/value-as-primary-reality/`}>
+      Next: Value as Primary Reality →
+    </a>
   </div>
 </div>

@@ -200,11 +200,17 @@ Values matter.
 
 ---
 
+export const base = import.meta.env.BASE_URL;
+
 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4rem" }}>
   <div>
-    <!-- Previous link here -->
+    <a href={`${base}essays/language/reinterpreting-the-linguistic-thinkers/`}>
+      ← Reinterpreting the Linguistic Thinkers
+    </a>
   </div>
   <div>
-    <!-- Next link here -->
+    <a href={`${base}essays/language/why-language-based-ai-cannot-be-enough/`}>
+      Next: Why Language-Based AI Cannot Be Enough →
+    </a>
   </div>
 </div>

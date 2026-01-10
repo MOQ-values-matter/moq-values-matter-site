@@ -161,11 +161,17 @@ Only from there can language be judged, repaired, and responsibly extended — n
 
 ---
 
+export const base = import.meta.env.BASE_URL;
+
 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4rem" }}>
   <div>
-    <!-- Previous link here -->
+    <a href={`${base}essays/language/language-in-a-value-centred-universe/`}>
+      ← Language in a Value-Centered Universe
+    </a>
   </div>
   <div>
-    <!-- Next link here -->
+    <a href={`${base}essays/language/why-this-matters-now/`}>
+      Next: Why This Matters Now →
+    </a>
   </div>
 </div>
