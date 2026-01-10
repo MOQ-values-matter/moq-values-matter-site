@@ -22,7 +22,11 @@ export default defineConfig({
         },
         {
           label: "Value Atlas",
-          autogenerate: { directory: "atlas" },
+          items: [
+            { label: "Overview", link: "/atlas/" },
+            { label: "clusters", autogenerate: { directory: "atlas/clusters" } },
+            { label: "Values", autogenerate: { directory: "atlas/values" } },
+          ],
         },
         {
           label: "Essays",

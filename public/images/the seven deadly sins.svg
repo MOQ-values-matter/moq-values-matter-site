@@ -1,0 +1,234 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Seven Deadly Sins cluster diagram on biological vs social dominance axes">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#05060b"/>
+      <stop offset="55%" stop-color="#071028"/>
+      <stop offset="100%" stop-color="#0b1020"/>
+    </linearGradient>
+
+    <!-- Soft vignette -->
+    <radialGradient id="vignette" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="70%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.32"/>
+    </radialGradient>
+
+    <!-- Neon accent gradient (for axis highlight) -->
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ff4fd8"/>
+    </linearGradient>
+
+    <!-- Node fills -->
+    <linearGradient id="bioFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a0b06"/>
+      <stop offset="55%" stop-color="#2a1107"/>
+      <stop offset="100%" stop-color="#0f0b12"/>
+    </linearGradient>
+
+    <linearGradient id="socFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07162b"/>
+      <stop offset="55%" stop-color="#081a33"/>
+      <stop offset="100%" stop-color="#0f0b12"/>
+    </linearGradient>
+
+    <linearGradient id="bridgeFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#190c2a"/>
+      <stop offset="55%" stop-color="#1b1140"/>
+      <stop offset="100%" stop-color="#0f0b12"/>
+    </linearGradient>
+
+    <!-- Strokes -->
+    <linearGradient id="bioStroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff8a3d" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ff4fd8" stop-opacity="0.70"/>
+    </linearGradient>
+
+    <linearGradient id="socStroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0.80"/>
+    </linearGradient>
+
+    <linearGradient id="bridgeStroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ff4fd8" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <!-- Subtle grid pattern -->
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M80 0H0V80" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+
+    <!-- Soft shadow -->
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+
+    <!-- Glow -->
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Typography -->
+    <style>
+      .title { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; font-weight: 750; letter-spacing: 0.2px; }
+      .label { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; font-weight: 650; }
+      .text { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; font-weight: 520; }
+      .muted { fill: #e9eefc; fill-opacity: 0.72; }
+      .muted2 { fill: #e9eefc; fill-opacity: 0.60; }
+      .axis { stroke: #ffffff; stroke-opacity: 0.18; stroke-width: 2; }
+      .axisStrong { stroke: url(#neon); stroke-opacity: 0.55; stroke-width: 3; }
+      .tick { stroke: #ffffff; stroke-opacity: 0.14; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <!-- Background layers -->
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity="0.55"/>
+  <rect width="1600" height="900" fill="url(#vignette)"/>
+
+  <!-- Header -->
+  <g transform="translate(90,72)">
+    <text class="title" x="0" y="0" font-size="34" fill="#f4f7ff">The Seven Deadly Sins</text>
+    <text class="text muted" x="0" y="30" font-size="16">
+      Clustered by Dominant Value Level (Biological ↔ Social) and Primary Failure Mode (Lack of restraint ↔ Distortion / capture)
+    </text>
+  </g>
+
+  <!-- Plot area frame (soft) -->
+  <g transform="translate(90,120)">
+    <rect x="0" y="0" width="1420" height="720" rx="26" fill="#0b0f1a" fill-opacity="0.25" stroke="#ffffff" stroke-opacity="0.10"/>
+  </g>
+
+  <!-- Axes (centered at 800, 480) -->
+  <!-- Plot bounds: left=120, right=1480, top=150, bottom=810 -->
+  <g>
+    <!-- Vertical axis -->
+    <line x1="800" y1="170" x2="800" y2="790" class="axis"/>
+    <line x1="800" y1="170" x2="800" y2="790" class="axisStrong" filter="url(#glow)"/>
+
+    <!-- Horizontal axis -->
+    <line x1="140" y1="480" x2="1460" y2="480" class="axis"/>
+    <line x1="140" y1="480" x2="1460" y2="480" class="axisStrong" filter="url(#glow)"/>
+
+    <!-- Axis labels -->
+    <g>
+      <text class="label muted" x="820" y="200" font-size="14">SOCIAL DOMINANCE</text>
+      <text class="text muted2" x="820" y="222" font-size="12">relational visibility • norms • hierarchy</text>
+
+      <text class="label muted" x="820" y="782" font-size="14">BIOLOGICAL DOMINANCE</text>
+      <text class="text muted2" x="820" y="804" font-size="12">body • reward • survival drives</text>
+
+      <text class="label muted" x="150" y="458" font-size="14">LACK OF RESTRAINT</text>
+      <text class="text muted2" x="150" y="436" font-size="12">unmodulated consumption / conservation</text>
+
+      <!-- moved further right to avoid collision with Wrath -->
+      <text class="label muted" x="1210" y="458" font-size="14">DISTORTION / CAPTURE</text>
+      <text class="text muted2" x="1210" y="436" font-size="12">misvaluation • hierarchy / entitlement dynamics</text>
+    </g>
+  </g>
+
+  <!-- Node geometry updated: 300x96, rx=20 -->
+  <!-- Typography slightly reduced for fit -->
+
+  <!-- SOCIAL nodes -->
+  <g filter="url(#shadow)">
+    <!-- Envy (upper-center-left) -->
+    <g transform="translate(350,165)">
+      <rect x="0" y="0" width="300" height="96" rx="20" fill="url(#socFill)" stroke="url(#socStroke)" stroke-width="2.5"/>
+      <text class="label" x="20" y="40" font-size="21" fill="#f4f7ff">Envy</text>
+      <text class="text muted" x="20" y="66" font-size="13.5">comparative valuation distortion</text>
+      <text class="text muted2" x="20" y="84" font-size="11.5">zero-sum framing • leveling pressure</text>
+    </g>
+
+    <!-- Pride (upper-right) -->
+    <g transform="translate(1040,150)">
+      <rect x="0" y="0" width="300" height="96" rx="20" fill="url(#socFill)" stroke="url(#socStroke)" stroke-width="2.5"/>
+      <text class="label" x="20" y="40" font-size="21" fill="#f4f7ff">Pride</text>
+      <text class="text muted" x="20" y="66" font-size="13.5">status-based hierarchy capture</text>
+      <text class="text muted2" x="20" y="84" font-size="11.5">identity inflation • exemption instincts</text>
+    </g>
+
+    <!-- Greed (upper-right, slightly lower) -->
+    <g transform="translate(1000,258)">
+      <rect x="0" y="0" width="300" height="96" rx="20" fill="url(#socFill)" stroke="url(#socStroke)" stroke-width="2.5"/>
+      <text class="label" x="20" y="40" font-size="21" fill="#f4f7ff">Greed</text>
+      <text class="text muted" x="20" y="66" font-size="13.5">entitlement asymmetry</text>
+      <text class="text muted2" x="20" y="84" font-size="11.5">resource capture • unequal constraint</text>
+    </g>
+  </g>
+
+  <!-- BRIDGE node -->
+  <g filter="url(#shadow)">
+    <!-- Wrath (nudged slightly left/down to avoid label area) -->
+    <g transform="translate(780,410)">
+      <rect x="0" y="0" width="300" height="96" rx="20" fill="url(#bridgeFill)" stroke="url(#bridgeStroke)" stroke-width="2.5"/>
+      <text class="label" x="20" y="40" font-size="21" fill="#f4f7ff">Wrath</text>
+      <text class="text muted" x="20" y="66" font-size="13.5">norm assertion without calibration</text>
+      <text class="text muted2" x="20" y="84" font-size="11.5">boundary force • urgency over proportionality</text>
+    </g>
+  </g>
+
+  <!-- BIOLOGICAL nodes -->
+  <g filter="url(#shadow)">
+    <!-- Lust (bottom-right) -->
+    <g transform="translate(1040,662)">
+      <rect x="0" y="0" width="300" height="96" rx="20" fill="url(#bioFill)" stroke="url(#bioStroke)" stroke-width="2.5"/>
+      <text class="label" x="20" y="40" font-size="21" fill="#f4f7ff">Lust</text>
+      <text class="text muted" x="20" y="66" font-size="13.5">temporal gratification dominance</text>
+      <text class="text muted2" x="20" y="84" font-size="11.5">immediacy • future-value erosion</text>
+    </g>
+
+    <!-- Sloth (bottom-center-left) -->
+    <g transform="translate(500,628)">
+      <rect x="0" y="0" width="300" height="96" rx="20" fill="url(#bioFill)" stroke="url(#bioStroke)" stroke-width="2.5"/>
+      <text class="label" x="20" y="40" font-size="21" fill="#f4f7ff">Sloth</text>
+      <text class="text muted" x="20" y="66" font-size="13.5">conservation refusing upward yield</text>
+      <text class="text muted2" x="20" y="84" font-size="11.5">non-mobilization • quiet decay</text>
+    </g>
+
+    <!-- Gluttony (bottom-left) -->
+    <g transform="translate(280,732)">
+      <rect x="0" y="0" width="300" height="96" rx="20" fill="url(#bioFill)" stroke="url(#bioStroke)" stroke-width="2.5"/>
+      <text class="label" x="20" y="40" font-size="21" fill="#f4f7ff">Gluttony</text>
+      <text class="text muted" x="20" y="66" font-size="13.5">capacity overload</text>
+      <text class="text muted2" x="20" y="84" font-size="11.5">unrestrained intake • visible excess</text>
+    </g>
+  </g>
+
+  <!-- Legend (compact) -->
+  <g transform="translate(1110,760)">
+    <rect x="0" y="0" width="410" height="120" rx="18" fill="#0b0f1a" fill-opacity="0.60" stroke="#ffffff" stroke-opacity="0.10"/>
+    <g transform="translate(18,24)">
+      <text class="label" font-size="14" fill="#f4f7ff">Legend</text>
+
+      <g transform="translate(0,18)">
+        <rect x="0" y="10" width="16" height="16" rx="4" fill="url(#bioFill)" stroke="url(#bioStroke)" stroke-width="2"/>
+        <text class="text muted" x="26" y="23" font-size="12">Biological-dominant patterns</text>
+      </g>
+
+      <g transform="translate(0,42)">
+        <rect x="0" y="10" width="16" height="16" rx="4" fill="url(#socFill)" stroke="url(#socStroke)" stroke-width="2"/>
+        <text class="text muted" x="26" y="23" font-size="12">Social-dominant patterns</text>
+      </g>
+
+      <g transform="translate(0,66)">
+        <rect x="0" y="10" width="16" height="16" rx="4" fill="url(#bridgeFill)" stroke="url(#bridgeStroke)" stroke-width="2"/>
+        <text class="text muted" x="26" y="23" font-size="12">Bridge pattern (bio force on social meaning)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer note -->
+  <g transform="translate(90,870)">
+    <text class="text muted2" font-size="12">
+      Position indicates dominant value level and failure-mode type. No moral ranking implied.
+    </text>
+  </g>
+</svg>
