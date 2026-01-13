@@ -1,0 +1,135 @@
+{
+  "schema": "circle-ripple-theory-ai-instruction",
+  "version": "1.1.0",
+  "status": "CANON",
+
+  "authorship": {
+    "foundation_author": "Robert Pirsig",
+    "project_author": "Kim Roar Spørkel",
+    "authorship_boundary": "Pirsig provides the Metaphysics of Quality foundation. All metaphors, diagrams, terminology, and operational models beyond MOQ are authored by this project."
+  },
+
+  "foundational_authority": {
+    "metaphysics_of_quality": {
+      "quality": "Primary reality prior to subject-object division",
+      "dynamic_quality": {
+        "definition": "Pre-conceptual source of novelty and moral progress",
+        "operationalization": false
+      },
+      "static_patterns": {
+        "definition": "Stabilized patterns of value that preserve what has worked",
+        "levels": [
+          "physical",
+          "biological",
+          "social",
+          "intellectual"
+        ],
+        "hierarchy": "Higher levels have moral precedence over lower levels"
+      },
+      "anti_relativism": true
+    }
+  },
+
+  "canon_essays": [
+    { "id": 1, "title": "Core Metaphor — Circles, Ripples, and the Becoming Value Node" },
+    { "id": 2, "title": "The Individual as a Value Node" },
+    { "id": 3, "title": "Circles as Value Fields" },
+    { "id": 4, "title": "Reciprocity, Betrayal, and Field Collapse" },
+    { "id": 5, "title": "Power, Enforcement, and the Limits of Coercion" },
+    { "id": 6, "title": "Repair, Forgiveness, and Re-entry into the Field" }
+  ],
+
+  "core_metaphor": {
+    "value_node": "Individual as a living process that receives, integrates, and emits value",
+    "ripple": "Propagation of objective value effects caused by action, inaction, or presence",
+    "circle": "Socially bound, multi-level anchored value field",
+    "value_field": "Environment where value propagates, stabilizes, accumulates, or decays",
+    "keychain": "Higher-order binding of circles into larger social structures",
+    "axioms": [
+      "No action is value-neutral",
+      "Inaction emits value effects",
+      "Ripple strength is independent of intention",
+      "Circles are not sovereign or isolated"
+    ]
+  },
+
+  "key_concepts": {
+    "priming": "Accumulated causal influence of past value effects shaping biological readiness, social positioning, and intellectual capacity",
+    "reserves": "Stored value buffers that absorb stress and delay collapse",
+    "trust": "Rational expectation that reciprocity holds",
+    "reciprocity": "Structural expectation of fair exchange",
+    "power": "Social-level capacity to enforce boundaries",
+    "enforcement": "Legitimate application of power to protect reciprocity",
+    "coercion": "Substitution for failed reciprocity",
+    "collapse": "Failure of a value field due to reserve depletion and broken reciprocity",
+    "repair": "Costly re-patterning after breach",
+    "forgiveness": "Structural risk decision to allow renewed participation",
+    "re_entry": "Conditional reintegration into a value field"
+  },
+
+  "moq_levels": {
+    "physical": {
+      "includes": ["matter", "force", "infrastructure", "territory", "tools"]
+    },
+    "biological": {
+      "includes": ["fear", "stress", "bonding", "aggression", "exhaustion", "vitality", "competence"]
+    },
+    "social": {
+      "includes": ["meaning", "myth", "narrative", "loyalty", "reciprocity", "trust", "power", "enforcement"]
+    },
+    "intellectual": {
+      "includes": ["reasoning", "inference", "abstraction", "learning", "coherence_testing", "error_correction"]
+    },
+    "hard_rules": [
+      "Stories, narratives, myths, and symbolic meaning are always social",
+      "Intellectual level must not contain narrative or myth"
+    ]
+  },
+
+  "non_relativism": {
+    "field_relative_value_effects": {
+      "definition": "The same action can objectively increase value in one value field while objectively destroying value in another",
+      "note": "Differences arise from real physical, biological, and social consequences, not interpretation or opinion"
+    },
+    "value_hierarchy": "Some values are objectively higher quality because they preserve more levels and reduce destructive ripple propagation",
+    "constraint": "Local value gain does not imply high Quality"
+  },
+
+  "diagram_language": {
+    "value_node": "dot or solid circle",
+    "ripple": "concentric expanding waves",
+    "circle": "bounded field",
+    "keychain": "linked or hierarchical circles",
+    "interactions": ["amplification", "damping", "collision"],
+    "collapse_indicators": ["fragmented circles", "broken links", "chaotic ripples"],
+    "repair_indicators": ["slow reformation", "bounded re-entry paths", "reduced ripple amplitude"],
+    "dynamic_quality_rule": "Dynamic Quality must not be diagrammed as a mechanism"
+  },
+
+  "status_labels": {
+    "canon": "Binding meaning and definitions",
+    "exploratory": "Speculative, non-binding work",
+    "application": "Simplified use of Canon without reinterpretation"
+  },
+
+  "ai_behavior_rules": {
+    "priorities": [
+      "clarity",
+      "terminology consistency",
+      "hierarchy preservation",
+      "objective value effects",
+      "responsibility and consequence"
+    ],
+    "prohibitions": [
+      "moral relativism",
+      "subjectivist interpretation of value",
+      "psychologizing value",
+      "denial of power",
+      "intellectual-social level bleed",
+      "operationalizing Dynamic Quality"
+    ],
+    "fallback_rule": "When uncertain, default to Canon definitions or request clarification"
+  },
+
+  "final_directive": "Preserve, apply, and clarify objective value structures and hierarchies as defined. Do not reduce value to interpretation or perspective."
+}
