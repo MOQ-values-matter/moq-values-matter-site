@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1900" viewBox="0 0 1100 1900">
+  <defs>
+    <style><![CDATA[
+      .h1 { font: 700 26px Arial, Helvetica, sans-serif; }
+      .sub { font: 500 14px Arial, Helvetica, sans-serif; opacity: .9; }
+      .rt { font: 700 20px Arial, Helvetica, sans-serif; }
+      .lbl { font: 600 14px Arial, Helvetica, sans-serif; }
+      .dom { font: 700 18px Arial, Helvetica, sans-serif; }
+      .txt { font: 500 14px Arial, Helvetica, sans-serif; opacity: .85; }
+      .sup { font: 500 14px Arial, Helvetica, sans-serif; opacity: .55; }
+    ]]></style>
+  </defs>
+
+  <text x="60" y="48" class="h1">Value Drift Ladder — Test SVG</text>
+  <text x="60" y="72" class="sub">Failure is not the loss of values, but the re-ordering of which values are allowed to question reality.</text>
+<rect x="80" y="90" width="940" height="250" rx="18" ry="18" fill="white" stroke="#000" stroke-opacity="0.20"/>
+<text x="102" y="124" class="rt">RUNG 0 — Permeable Stability</text>
+<text x="102" y="154" class="lbl">Dominant</text>
+<text x="220" y="154" class="dom">Prudence • Integrity • Justice • Temperance</text>
+<text x="102" y="186" class="lbl">Supporting</text>
+<text x="220" y="186" class="txt">Duty (role-based) • Loyalty (institutional) • Truth • Mercy</text>
+<text x="102" y="318" class="txt">“Preserve what works; adapt when reality demands.”</text>
+<text x="550.0" y="356.0" text-anchor="middle" class="lbl" opacity=".75">↓ Fear / Security Shock</text>
+<rect x="80" y="360" width="940" height="250" rx="18" ry="18" fill="white" stroke="#000" stroke-opacity="0.20"/>
+<text x="102" y="394" class="rt">RUNG 1 — Protective Hardening</text>
+<text x="102" y="424" class="lbl">Dominant</text>
+<text x="220" y="424" class="dom">Power • Duty • Loyalty</text>
+<text x="102" y="456" class="lbl">Suppressed</text>
+<text x="220" y="456" class="sup">Prudence (narrowed) • Justice (instrumental) • Truth (contextual)</text>
+<text x="102" y="588" class="txt">“Order first. Questions later.”</text>
+<text x="550.0" y="626.0" text-anchor="middle" class="lbl" opacity=".75">↓ Legitimacy Anxiety</text>
+<rect x="80" y="630" width="940" height="250" rx="18" ry="18" fill="white" stroke="#000" stroke-opacity="0.20"/>
+<text x="102" y="664" class="rt">RUNG 2 — Moral Re‑Legitimation</text>
+<text x="102" y="694" class="lbl">Dominant</text>
+<text x="220" y="694" class="dom">Faith • Myth • Temperance</text>
+<text x="102" y="726" class="lbl">Suppressed</text>
+<text x="220" y="726" class="sup">Integrity • Truth • Mercy</text>
+<text x="102" y="858" class="txt">“We must return to who we truly are.”</text>
+<text x="550.0" y="896.0" text-anchor="middle" class="lbl" opacity=".75">↓ Resentment / Inequality</text>
+<rect x="80" y="900" width="940" height="250" rx="18" ry="18" fill="white" stroke="#000" stroke-opacity="0.20"/>
+<text x="102" y="934" class="rt">RUNG 3 — Populist Retention</text>
+<text x="102" y="964" class="lbl">Dominant</text>
+<text x="220" y="964" class="dom">Loyalty • Envy • Justice (mutated)</text>
+<text x="102" y="996" class="lbl">Suppressed</text>
+<text x="220" y="996" class="sup">Integrity • Prudence • Truth</text>
+<text x="102" y="1128" class="txt">“Fairness requires correction.”</text>
+<text x="550.0" y="1166.0" text-anchor="middle" class="lbl" opacity=".75">↓ Succession / Fragility</text>
+<rect x="80" y="1170" width="940" height="250" rx="18" ry="18" fill="white" stroke="#000" stroke-opacity="0.20"/>
+<text x="102" y="1204" class="rt">RUNG 4 — Continuity Lock</text>
+<text x="102" y="1234" class="lbl">Dominant</text>
+<text x="220" y="1234" class="dom">Loyalty • Duty • Power</text>
+<text x="102" y="1266" class="lbl">Suppressed</text>
+<text x="220" y="1266" class="sup">Courage • Truth • Prudence</text>
+<text x="102" y="1398" class="txt">“Deviation is risk.”</text>
+<text x="550.0" y="1436.0" text-anchor="middle" class="lbl" opacity=".75">↓ Existential Panic</text>
+<rect x="80" y="1440" width="940" height="250" rx="18" ry="18" fill="white" stroke="#000" stroke-opacity="0.20"/>
+<text x="102" y="1474" class="rt">RUNG 5 — Ideological Closure</text>
+<text x="102" y="1504" class="lbl">Dominant</text>
+<text x="220" y="1504" class="dom">Myth • Power • Deception</text>
+<text x="102" y="1536" class="lbl">Suppressed</text>
+<text x="220" y="1536" class="sup">Truth (nearly invisible) • Integrity • Mercy • Courage</text>
+<text x="102" y="1668" class="txt">“Narrative unity is survival.”</text>
+</svg>
