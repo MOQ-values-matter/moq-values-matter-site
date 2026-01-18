@@ -1,0 +1,79 @@
+<svg
+  width="720"
+  height="220"
+  viewBox="0 0 720 220"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="Minimal diagram showing Aggression internal to a value node, Coercion as a dashed social pressure link, and Force as a thick capacity-altering interaction."
+>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="currentColor" />
+    </marker>
+    <marker id="arrowThin" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="currentColor" />
+    </marker>
+  </defs>
+
+  <!-- Background label -->
+  <text x="20" y="28" font-size="16" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    Aggression (Biological) · Coercion (Social) · Force (Physical)
+  </text>
+
+  <!-- Value nodes -->
+  <circle cx="170" cy="130" r="48" fill="none" stroke="currentColor" stroke-width="2" />
+  <circle cx="550" cy="130" r="48" fill="none" stroke="currentColor" stroke-width="2" />
+
+  <text x="170" y="190" text-anchor="middle" font-size="12" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    Node A
+  </text>
+  <text x="550" y="190" text-anchor="middle" font-size="12" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    Node B
+  </text>
+
+  <!-- Aggression: internal activation marker (no outward arrow/ripple) -->
+  <circle cx="170" cy="130" r="16" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" />
+  <text x="170" y="135" text-anchor="middle" font-size="10" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    AGGR
+  </text>
+  <text x="170" y="86" text-anchor="middle" font-size="11" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    internal activation
+  </text>
+
+  <!-- Coercion: dashed social pressure link (bounded directional) -->
+  <line
+    x1="230" y1="105"
+    x2="490" y2="105"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-dasharray="6 5"
+    marker-end="url(#arrowThin)"
+  />
+  <text x="360" y="92" text-anchor="middle" font-size="11" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    COERCION (threat-backed pressure)
+  </text>
+
+  <!-- Force: thick capacity-altering interaction (interruptive) -->
+  <line
+    x1="230" y1="155"
+    x2="490" y2="155"
+    stroke="currentColor"
+    stroke-width="5"
+    marker-end="url(#arrow)"
+  />
+  <!-- Terminal bar at target to suggest capacity interruption/constraint -->
+  <line
+    x1="498" y1="138"
+    x2="498" y2="172"
+    stroke="currentColor"
+    stroke-width="5"
+  />
+  <text x="360" y="142" text-anchor="middle" font-size="11" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    FORCE (capacity alteration)
+  </text>
+
+  <!-- Directionality note -->
+  <text x="20" y="212" font-size="11" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    Note: diagram is illustrative only; it does not imply inevitability, legitimacy, or moral justification.
+  </text>
+</svg>
