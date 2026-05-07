@@ -1,0 +1,408 @@
+---
+title: AI Instructions — MOQ Values Matter
+description: Single authoritative reference defining how AI assistants must reason, behave, and act when contributing to the MOQ Values Matter repository.
+---
+
+## Authority and Scope
+
+This is the **single authoritative instruction file** for all AI assistants working inside the MOQ Values Matter repository.
+
+It governs:
+- how AI assistants reason about the project
+- what AI assistants are permitted and forbidden to do
+- how AI assistants handle Canon, content types, files, and uncertainty
+
+**Conflict resolution order:**
+
+1. Canon governance (`canon-governance.mdx`) overrides everything on questions of what Canon *is*
+2. This file governs all AI reasoning and behavior
+3. Supplementary theory files (e.g. `circle-theory-ai-instruction.json`) apply within their stated scope and defer to this file on all conflicts
+
+No other file may override this file's behavioral rules without an explicit revision to this document.
+
+---
+
+## 1. Project Purpose
+
+Build a stable, high-quality, internally coherent knowledge base grounded in **Pirsig's Metaphysics of Quality (MOQ)**, with a strong emphasis on Canon-grade stability and revision discipline.
+
+MOQ treats **value as the primary organizing principle of reality**. Static value patterns operate across four levels:
+
+- Physical
+- Biological
+- Social
+- Intellectual
+
+AI assistants must respect this hierarchy at all times and avoid reductionism across levels.
+
+---
+
+## 2. Governance Documents
+
+AI assistants must know and apply the following documents:
+
+| Document | Purpose |
+|---|---|
+| `canon-governance.mdx` | What Canon is, what it is not, how it is protected and revised |
+| `canon-promotion-checklist.mdx` | Mandatory criteria for promoting a Value Atlas entry to Canon |
+| `canon-value-construction-method.mdx` | How Canon value entries are built section by section |
+| `ai-instructions.mdx` | This file — AI reasoning and behavior |
+
+Supplementary theory documents (e.g. `circle-theory-ai-instruction.json`) apply only to their stated domain and defer to this file on any conflict.
+
+---
+
+## 3. Repository Structure
+
+**Content root:** `src/content/docs/`
+
+No AI assistant may place site-rendered content outside this directory or create new top-level folders without explicit instruction.
+
+**Approved folders:**
+
+| Folder | Purpose |
+|---|---|
+| `fundamentals/` | Foundational reference: laws, frameworks, definitions |
+| `fundamentals/glossary/` | Project-wide term definitions — atomic, deep-linkable glossary entries |
+| `fundamentals/clusters/` | Canon cluster pages — structural relationships between Canon entries only |
+| `atlas/` | Value pattern entries (Canon or candidate) |
+| `essays/` | Exploratory, interpretive, speculative writing |
+| `methods/` | Analytical tools, templates, procedures |
+| `governance/` | Canon rules, checklists, scope, AI instructions |
+
+**Key law paths:**
+- `src/content/docs/fundamentals/laws/physical.mdx`
+- `src/content/docs/fundamentals/laws/biological.mdx`
+- `src/content/docs/fundamentals/laws/social.mdx`
+- `src/content/docs/fundamentals/laws/intellectual.mdx`
+
+---
+
+## 4. File Standards
+
+### 4.1 File Type
+
+`.mdx` is the **project standard** for all content files, including Canon.
+
+Reasons: supports embedded diagrams and visuals, compatible with Starlight, supports future composability.
+
+Use `.md` only if explicitly requested. Never default to `.md`.
+
+### 4.2 MDX Anchor Rules
+
+The `{#id}` heading syntax **must never be used** — it causes MDX parsing errors.
+
+**Required pattern for all deep-linkable sections:**
+
+```mdx
+<a id="section-id"></a>
+## Section Title
+```
+
+This pattern is MDX-safe, stable, and compatible with future components.
+
+### 4.3 Law ID Conventions
+
+Law IDs are referential infrastructure. They must **never be renumbered or casually altered**.
+
+| Level | ID Range |
+|---|---|
+| Physical | `law-p-01` → `law-p-06` |
+| Biological | `law-b-01` → `law-b-05` |
+| Social | `law-s-01` → `law-s-07` (law-s-07 = Myth / Shared Narrative) |
+| Intellectual | `law-i-01` → `law-i-08` |
+
+IDs must remain stable across edits, rewrites, expansions, and visual refactors.
+
+### 4.4 Link Style
+
+Use absolute site paths with anchors:
+
+```
+/fundamentals/laws/physical/#law-p-04
+```
+
+Avoid relative paths that break if files move, raw URLs inside Canon content, and duplicated anchor definitions. Links are part of Canon stability.
+
+---
+
+## 5. Content Types
+
+### 5.1 Canon (Static Quality)
+
+Canon content is:
+- stable, coherent, cross-linked, revision-controlled
+- minimally stylistic — no rhetorical inflation
+- governed by `canon-governance.mdx`
+
+Canon content includes:
+- `fundamentals/laws/*`
+- `atlas/*` entries that have passed Canon promotion
+- governance files and checklists
+
+### 5.2 Essays (Exploratory)
+
+Essays may explore, speculate, compare, and propose ideas.
+
+Essays must not:
+- silently alter Canon meaning
+- redefine Dynamic Quality
+- treat Dynamic Quality as a method
+
+When in doubt about where content belongs, place it in `essays/` and mark it exploratory. Do not modify Canon.
+
+### 5.3 Methods
+
+Methods are **intellectual static patterns** — analytical tools, lenses, templates, and procedures.
+
+Methods may inform Canon analysis and Essays. They may not override Canon verdicts, redefine Canon structure, or claim authority by themselves.
+
+Methods belong in `methods/` or `essays/`. They do not belong in the Atlas unless explicitly promoted through full Canon governance. Usefulness is not Canon status.
+
+### 5.4 Canon Clusters
+
+Canon cluster pages organize structural relationships between existing Canon value patterns. They are not essays and must not be placed under `essays/`.
+
+Clusters must:
+- reference only Canon entries (no Draft clustering)
+- describe relationships only — no new patterns, no reinterpretations
+- introduce zero new evaluative claims
+- preserve MOQ hierarchy and level boundaries
+- be updated only to restore accuracy when linked Canon entries change
+
+**A new cluster is justified only when:**
+1. It references two or more Canon entries
+2. It introduces no new claims
+3. It resolves a recurring structural ambiguity that cross-links alone cannot resolve
+4. It preserves MOQ boundaries
+5. It is entirely traceable to existing Canon text
+
+Cluster pages belong under `src/content/docs/fundamentals/clusters/`.
+
+---
+
+## 6. Dynamic Quality — Absolute Constraint
+
+Dynamic Quality **cannot be defined, formalized, operationalized, modularized, or treated as a method**.
+
+AI assistants must **never**:
+- describe Dynamic Quality as a framework, lens, tool, or algorithm
+- equate Dynamic Quality with creativity, exploration, or novelty
+- claim that Dynamic Quality is being "applied," "used," or "implemented"
+- present Dynamic Quality as a repeatable procedure
+
+Dynamic Quality may only be:
+- referenced as the pre-intellectual source of novelty
+- acknowledged as something recognizable only *after* it has passed into static patterns
+
+Any attempt to systematize Dynamic Quality is a category error and a violation of MOQ.
+
+---
+
+## 7. MOQ Level Discipline
+
+AI assistants must preserve strict level boundaries at all times — but levels interact continuously across the hierarchy, and that interaction is essential to how the system functions.
+
+**Hard rules:**
+- Stories, narratives, myths, and symbolic meaning are always **social**, never intellectual
+- Intellectual analysis does not override physical, biological, or social realities — it operates within and on them
+- Higher levels cannot originate lower-level patterns — they cannot bring into existence what the lower level has not produced as substrate
+- Higher levels can stabilise, constrain, formalise, distort, or modulate lower-level patterns — this is legitimate cross-level interaction, not a hierarchy violation
+- Reductionism across levels is prohibited: no level can be explained as merely a configuration of the level it depends on
+- What is high quality at one level may be low or opposite quality at another level — quality is level-relative even though the levels exist in holistic relation
+
+**Common misreading to avoid:**
+The MOQ hierarchy is sometimes treated as if it forbade all higher-to-lower influence. This overstates the prohibition. What MOQ forbids is reduction (explaining a higher level as merely a configuration of a lower one) and origination (treating a higher level as the source of a lower-level pattern). What MOQ permits and requires is continuous cross-level interaction through which higher levels operate on the substrate they depend on. The hierarchy describes precedence under conflict, not isolation between levels.
+
+**When working with social-level content**, avoid:
+- moralizing social power structures
+- sanitizing coercion
+- importing intellectual ideals (truth, freedom) into social-level laws
+
+Social laws describe coordination, enforcement, loyalty, and meaning-binding. They do not describe justice or truth.
+
+---
+
+## 8. Canon Value Atlas Entries
+
+Canon entries represent stabilized intellectual patterns and must follow the **Canonical Value Atlas Entry structure** exactly.
+
+The structure has **10 required sections** in this order:
+
+1. Neutral Definition
+2. Multi-Level Evaluation (0–2 per level)
+3. Multi-Level Coherence Analysis
+4. Relational Impact Map
+5. Persistence Logic
+6. Empirical Evidence
+7. MOQ Coherence Verdict
+8. Summary Schema
+9. Explicit Boundary Rejections
+10. Canon Status & Revision Notes
+
+AI assistants must:
+- preserve all 10 sections in order
+- keep all analysis inline — no modular lenses
+- avoid moralizing language
+- distinguish clearly between description, analysis, evidence, and verdict
+
+AI assistants must not invent alternative templates or reorder canonical sections.
+
+For the purpose and constraints of each section, see `canon-value-construction-method.mdx`.
+
+---
+
+## 9. Canon Promotion
+
+AI assistants may assist in drafting, revising, and checking entries against the Canon Promotion Checklist.
+
+AI assistants must **never**:
+- declare Canon status implicitly or informally
+- promote an entry to Canon without explicit human instruction
+- weaken Canon criteria for convenience or speed
+
+Canon promotion requires:
+- explicit evaluation against all checklist criteria
+- explicit Canon Declaration appended to revision notes
+- documented rationale for promotion
+
+There are no silent promotions.
+
+---
+
+## 10. Editing Canon Content
+
+When editing any Canon content, AI assistants must:
+- preserve section order
+- preserve headings and anchor IDs
+- preserve tables unless explicitly directed to revise them
+- make all changes explicit and explain why the change is needed
+
+AI assistants must **never**:
+- silently rewrite Canon meaning
+- "clean up" language in a way that changes substance
+- remove or rename laws
+- introduce new laws without full governance scrutiny
+- collapse distinctions between MOQ levels
+
+Canon is static quality by design. Stability is not inertia — it is discipline.
+
+---
+
+## 11. Visuals and Diagrams
+
+AI assistants may embed SVGs, include diagrams, and reference visual schemas.
+
+AI assistants must:
+- treat visuals as explanatory, not authoritative
+- keep Canon text primary
+- avoid changing meaning through visual framing
+- never diagram Dynamic Quality as a mechanism
+
+---
+
+## 12. Intellectual Virtues
+
+All AI output must prioritize:
+
+- Coherence over cleverness
+- Clarity over persuasion
+- Restraint over overreach
+- Explicit limits over hidden assumptions
+- Comparative reasoning over absolute claims
+
+AI assistants must surface boundary conditions, failure modes, trade-offs, and competing explanations wherever they are relevant.
+
+---
+
+## 13. Disagreement and Authority
+
+Disagreement with Canon is permitted and may be valuable.
+
+Replacement of Canon requires **higher-quality stabilization**, not argument alone.
+
+AI assistants may critique Canon entries but must:
+- do so explicitly, not by silent substitution
+- reference Canon criteria when critiquing
+- avoid rhetorical or ideological framing
+
+---
+
+## 14. When Uncertain
+
+When unsure, AI assistants must:
+- default to restraint
+- ask for clarification rather than assume
+- preserve Canon stability above all
+- propose changes rather than commit them silently
+
+Silence or explicit qualification is always preferred to confident error.
+
+If unsure where content belongs → place it in `essays/`, mark it exploratory, do not modify Canon.
+
+If unsure about a law → reference existing laws, do not invent new ones.
+
+If unsure about a change → propose it, explain the reasoning, wait for confirmation.
+
+---
+
+## 15. Known Current Decisions (Snapshot)
+
+These decisions are active and must not be overridden without explicit instruction:
+
+| Decision | Value |
+|---|---|
+| Site stack | Astro + Starlight |
+| Standard file type | `.mdx` |
+| Anchor syntax | `<a id="..."></a>` |
+| Social laws include | Myth as `law-s-07` |
+| Fundamental laws | Canon-grade |
+| Canon entry sections | 10 (see Section 8) |
+| Canon changes | Require explicit scrutiny and documentation |
+
+### 15.1 Standard Frontmatter Fields
+
+Every content file must include the following frontmatter fields. All fields are required unless marked optional.
+
+**`type`** — machine-readable content classification. Valid values:
+
+| Value | Used for |
+|---|---|
+| `Atlas Entry` | Value pattern entries in `atlas/` |
+| `Glossary Entry` | Term definitions in `glossary/` |
+| `Governance` | Governance and instruction documents |
+| `Cluster` | Canon cluster pages in `fundamentals/clusters/` |
+| `Essay` | Exploratory writing in `essays/` |
+| `Method` | Analytical tools and procedures in `methods/` |
+| `Law` | Fundamental law pages in `fundamentals/laws/` |
+
+**`status`** — current standing of the entry. Valid values depend on content type:
+
+| Context | Valid status values |
+|---|---|
+| Atlas entries | `Draft`, `Reviewed`, `Canon`, `Deprecated` |
+| Glossary entries | `Canon`, `Exploratory`, `Deprecated` |
+| Governance documents | `Canon` |
+| Essays | `Exploratory` |
+| Methods | `Exploratory`, `Canon` |
+| Circle/Ripple supplement | `Canon`, `Exploratory` |
+
+No other status values are permitted. Any status label not in this table is a drift error and must be corrected. The previously used label `Canon-stable` is non-standard and must be replaced with `Canon` wherever it appears.
+
+**`layer`** — scope of the entry (optional but recommended for Glossary entries):
+
+| Value | Meaning |
+|---|---|
+| `MOQ Foundation` | Pirsig's core concepts — cannot be redefined by this project |
+| `Project-Wide` | Shared vocabulary across the full project |
+| `Circle/Ripple Theory` | Scoped to the Circle/Ripple supplement only |
+
+---
+
+## Final Instruction
+
+AI assistants are collaborators in **quality preservation**, not generators of authority.
+
+The goal is not to produce content quickly, but to ensure that what persists is worthy of persistence.
+
+> Preserve stability first. Invite Dynamic Quality second. Never collapse the hierarchy.

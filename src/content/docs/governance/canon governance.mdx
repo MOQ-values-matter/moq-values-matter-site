@@ -1,35 +1,39 @@
 ---
 title: Canon Governance
-description: How Canon is defined, maintained, and protected in MOQ Values Matter.
+description: How Canon is defined, protected, scoped, and revised in MOQ Values Matter. Single authoritative governance reference.
 ---
 
 ## Purpose
 
 This document defines how **Canon** functions within the MOQ Values Matter project.
 
+It covers:
+- what Canon is and is not
+- the three content status labels and their rules
+- scope boundaries for the Atlas, Essays, and Methods
+- how Canon is promoted, revised, and deprecated
+
 Canon exists to stabilize **high-quality intellectual patterns** once they have proven coherent, grounded, and explanatorily superior under current conditions.
 
 Canon is not truth, doctrine, or ideology.
 It is a mechanism for **preserving intellectual excellence without freezing inquiry**.
 
-## Related Governance Documents
+---
 
-Canon governance operates together with the following documents:
+## Related Documents
 
-- **Canon Promotion Checklist**  
-  Defines the mandatory criteria for promoting an entry to Canon status.  
-  → See: [/governance/canon-promotion-checklist/](/governance/canon-promotion-checklist/)
+| Document | Purpose |
+|---|---|
+| `ai-instructions.mdx` | How AI assistants must reason and act |
+| `canon-promotion-checklist.mdx` | Mandatory criteria for promoting an entry to Canon |
+| `canon-value-construction-method.mdx` | How Canon value entries are built |
 
-- **AI Instructions**  
-  Defines how AI assistants must interpret and apply Canon rules, including strict constraints regarding Dynamic Quality and intellectual methods.  
-  → See: `AI-INSTRUCTIONS.md` (repository root)
-
-These documents are complementary.  
-No single document defines Canon in isolation.
+No single document defines Canon in isolation. On conflicts, this document takes precedence over all others except `ai-instructions.mdx` on questions of AI behavior.
 
 ---
 
-## What Canon Is
+<a id="what-canon-is"></a>
+## 1. What Canon Is
 
 Canon is a collection of **stabilized intellectual-level static patterns**.
 
@@ -38,13 +42,18 @@ A Canon entry represents:
 - grounded in observable reality
 - aligned across MOQ levels
 - with known limits and failure modes
-- judged superior to available alternatives
+- judged superior to available alternatives under current conditions
 
 Canon entries persist because they have **earned stability**, not because they are final.
 
+In MOQ terms, Canon entries are **static intellectual patterns**. They are subordinate to physical, biological, and social realities, must respect cross-level constraints, and remain corrigible when higher-quality static patterns emerge.
+
+Canon does not claim metaphysical primacy. It claims **functional excellence under present conditions**.
+
 ---
 
-## What Canon Is Not
+<a id="what-canon-is-not"></a>
+## 2. What Canon Is Not
 
 Canon is explicitly **not**:
 
@@ -55,72 +64,222 @@ Canon is explicitly **not**:
 - A method or framework
 - A container for Dynamic Quality
 
-Dynamic Quality cannot be defined, operationalized, or institutionalized.
-Canon records *what remains* after Dynamic Quality has already passed and stabilized.
+Dynamic Quality cannot be defined, operationalized, or institutionalized. Canon records *what remains* after Dynamic Quality has already passed and stabilized. For the full Dynamic Quality constraint, see `ai-instructions.mdx` Section 6.
 
 ---
 
-## Canon and the Metaphysics of Quality (MOQ)
+<a id="canon-authority"></a>
+## 3. Canon Authority
 
-In MOQ terms:
+Canon authority derives from:
+- coherence
+- grounding
+- explanatory power
+- comparative superiority
 
-- Canon entries are **static intellectual patterns**
-- They are subordinate to biological, social, and physical realities
-- They must respect cross-level constraints
-- They remain corrigible when higher-quality static patterns emerge
+It does **not** derive from authorship, institutional backing, ideological alignment, or technical sophistication.
 
-Canon does not claim metaphysical primacy.
-It claims **functional excellence under present conditions**.
-
----
-
-## Canon vs Exploration
-
-The project distinguishes clearly between:
-
-### Canon
-- Stabilized
-- Comparative
-- Slow-changing
-- Responsible
-- Governed
-
-### Exploration (Essays, Drafts, Methods)
-- Provisional
-- Creative
-- Competing
-- Fast-changing
-- Ungoverned
-
-Exploration may inform Canon.
-Exploration may challenge Canon.
-Exploration must not **redefine** Canon without passing governance rules.
+Disagreement with Canon is permitted and may be valuable.
+Replacement of Canon requires **higher-quality stabilization**, not argument alone.
 
 ---
 
-## Canon Promotion
+<a id="status-labels"></a>
+## 4. Content Status Labels
+
+Every text, diagram, or artifact in this project carries **exactly one** of the following status labels. Labels must be declared explicitly at the top of each file:
+
+```mdx
+<!-- STATUS: CANON -->
+<!-- STATUS: EXPLORATORY -->
+<!-- STATUS: APPLICATION -->
+```
+
+Without clear labels, exploratory ideas harden prematurely, Canon erodes silently, and disagreements become semantic rather than substantive.
+
+---
+
+<a id="label-canon"></a>
+### 4.1 🟥 CANON
+
+Canon artifacts define **binding concepts, terms, structures, and governance rules** for the project.
+
+Canon is normative. Canon terms must be used consistently everywhere else. Canon conflicts override all other content.
+
+**Canon answers:** *"What does this project mean?"*
+
+**Includes:** fundamental laws, Atlas entries that have passed promotion, governance documents, the Canon glossary.
+
+**Rules:**
+- Canon cannot be casually edited
+- Changes require explicit revision intent and documented rationale
+- Canon terms must not be redefined outside Canon governance
+
+---
+
+<a id="label-exploratory"></a>
+### 4.2 🟧 EXPLORATORY
+
+Exploratory artifacts are spaces for testing ideas, extending the model, probing edge cases, integrating external perspectives, and speculative application.
+
+Exploratory work is **not binding**.
+
+**Exploratory answers:** *"What might be possible?"*
+
+**Includes:** draft essays, speculative diagrams, cross-framework experiments, early notes, thought experiments.
+
+**Rules:**
+- Must not redefine Canon terms
+- Must not silently contradict Canon
+- If an idea stabilizes, it must be explicitly promoted to Canon — nothing becomes Canon by accident
+
+---
+
+<a id="label-application"></a>
+### 4.3 🟦 APPLICATION
+
+Application artifacts adapt Canon for specific audiences or domains — coaching, leadership, education, public communication — by simplifying language **without changing structure**.
+
+**Application answers:** *"How is this used here?"*
+
+**Includes:** executive guides, coaching tools, workshop materials, public-facing summaries.
+
+**Rules:**
+- Must conform to Canon
+- Simplification is permitted; reinterpretation is not
+- If Application reveals ambiguity in Canon, Canon must be clarified — the ambiguity is Canon's problem, not Application's license
+
+---
+
+<a id="conflict-resolution"></a>
+### 4.4 Conflict Resolution Between Labels
+
+When two documents conflict:
+- Canon overrides Exploratory
+- Canon overrides Application
+- Exploratory conflicts must be resolved before promotion to Canon
+- Application conflicts indicate misuse of Application, not an error in Canon
+
+---
+
+<a id="scope-boundaries"></a>
+## 5. Scope Boundaries
+
+The project distinguishes between stabilized knowledge, exploratory thought, and analytical tooling. These serve different functions and must not be mixed.
+
+---
+
+<a id="scope-atlas"></a>
+### 5.1 The Value Atlas
+
+The Value Atlas contains **Canonical Value Patterns**: stabilized intellectual descriptions of recurring value patterns, analyzed across MOQ levels, grounded in observable reality, and governed by Canon rules.
+
+The Atlas exists to answer: *"What value patterns reliably exist, and how do they function across levels?"*
+
+**Belongs in the Atlas:**
+- value patterns (not opinions) that recur across contexts, cultures, or systems
+- entries suitable for stabilization and comparison
+- entries that can plausibly satisfy the Canon Promotion Checklist
+
+Examples of Atlas-eligible patterns: Justice, Loyalty, Trust, Power, Legitimacy, Corruption, Authority.
+
+**Does not belong in the Atlas:**
+- speculative theories
+- personal reflections
+- political advocacy
+- methodological debates
+- narratives or storytelling
+- emerging ideas without stabilization
+- unresolved ideological positions
+
+If an entry requires persuasion to be accepted, it does not belong in the Atlas.
+
+> Nothing may enter the Value Atlas unless it can plausibly satisfy the Canon Promotion Checklist.
+
+---
+
+<a id="scope-essays"></a>
+### 5.2 Essays
+
+Essays are the **exploratory space** of the project. They exist to think aloud, test interpretations, connect patterns, challenge Canon, synthesize insights, and explore implications.
+
+Essays may be provisional, personal, speculative, argumentative, and incomplete.
+
+**Essays answer:** *"What might this mean? How does this connect? Where could this be wrong?"*
+
+**Belongs in Essays:**
+- interpretation of Atlas entries
+- critique of Canon patterns
+- synthesis across multiple values
+- historical or contemporary analysis
+- boundary-pushing ideas and unresolved tensions
+
+Essays may reference Canon. They may challenge Canon. They may never redefine Canon.
+
+---
+
+<a id="scope-methods"></a>
+### 5.3 Methods
+
+Methods are **intellectual tools**, not truths. They include analytical lenses, scoring heuristics, comparison techniques, diagnostic questions, and structured ways of reasoning.
+
+Methods are static intellectual patterns. They are not Dynamic Quality.
+
+**Methods answer:** *"How are we looking? What does this lens reveal? What does it obscure?"*
+
+Methods may inform Essays and support Atlas analysis. They must not override Canon verdicts, redefine Atlas structure, or claim authority by themselves. Usefulness is not Canon status.
+
+---
+
+<a id="scope-nowhere"></a>
+### 5.4 What Belongs Nowhere Yet
+
+Some things do not belong anywhere in the project yet:
+- raw intuition without articulation
+- unresolved emotional reactions
+- slogans or memes
+- purely rhetorical positions
+- premature abstractions
+- ideas that cannot yet be examined
+
+These belong in notebooks, drafts, and conversations — not in the repository. Not everything needs to be published.
+
+---
+
+<a id="scope-enforcement"></a>
+### 5.5 Boundary Enforcement Principle
+
+When in doubt:
+- Prefer **Essays** over Atlas
+- Prefer **not publishing** over misplacing
+- Prefer **restraint** over expansion
+
+Moving something into the Atlas is always harder than leaving it outside. This is intentional. Clarity of boundaries is a form of quality.
+
+---
+
+<a id="canon-promotion"></a>
+## 6. Canon Promotion
 
 Promotion to Canon is a **deliberate act**, not an automatic consequence of writing.
 
 An entry may be promoted to Canon only if:
-- it follows the Canonical Value Atlas Entry structure
+- it follows the Canonical Value Atlas Entry structure (10 sections)
 - it satisfies all criteria in the Canon Promotion Checklist
 - its promotion is explicitly declared and documented
 
-Canon promotion always involves:
-- responsibility
-- justification
-- traceability
+Canon promotion always requires responsibility, justification, and traceability. There are no silent promotions.
 
-There are no silent promotions.
+For the full promotion criteria, see `canon-promotion-checklist.mdx`.
 
 ---
 
-## Canon Revision
+<a id="canon-revision"></a>
+## 7. Canon Revision
 
 Canon is **stable, not frozen**.
 
-Revisions to Canon entries are allowed when:
+Revisions to Canon entries are permitted when:
 - new evidence emerges
 - better explanatory patterns appear
 - internal inconsistencies are discovered
@@ -135,57 +294,26 @@ Unjustified volatility is treated as quality degradation.
 
 ---
 
-## Canon Authority
+<a id="canon-deprecation"></a>
+## 8. Canon Deprecation
 
-Canon authority derives from:
-- coherence
-- grounding
-- explanatory power
-- comparative superiority
+When a Canon concept is replaced by a superior pattern:
+- it must be explicitly marked **Deprecated**
+- all references to it must be updated or annotated
+- the rationale for deprecation must be documented
 
-It does **not** derive from:
-- authorship
-- institutional backing
-- ideological alignment
-- technical sophistication
-
-Disagreement with Canon is permitted.
-Replacement of Canon requires **higher-quality stabilization**, not argument alone.
+Silent removal is not permitted. Deprecated entries remain in the repository as historical record until explicitly archived.
 
 ---
 
-## Methods and Frameworks
-
-Analytical methods, lenses, and frameworks are **intellectual static patterns**.
-
-They may:
-- inform analysis
-- clarify reasoning
-- generate insights
-
-They may not:
-- override Canon verdicts
-- redefine Canon structure
-- substitute for cross-level coherence
-
-Methods belong to **exploration**, not Canon, until they themselves stabilize.
-
----
-
-## Governance Principle
+<a id="governance-principle"></a>
+## 9. Governance Principle
 
 > Canon exists to protect the project from premature certainty, ideological capture, and intellectual drift — not to prevent revision.
 
 The burden of change lies with those who wish to disturb stability.
 The burden of justification rises with the level of stability claimed.
 
----
-
-## Closing Statement
-
-Canon is a discipline of restraint.
-
-It records the best intellectual patterns currently available,
-while remaining open to their eventual replacement by better ones.
-
-This balance — stability without dogma — is the core governance function of MOQ Values Matter.
+Canon is what we stand on.
+Exploratory is where we step forward.
+Both are necessary. Confusing them is not.

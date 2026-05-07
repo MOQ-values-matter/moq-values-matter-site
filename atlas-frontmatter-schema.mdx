@@ -1,0 +1,314 @@
+---
+title: Atlas Entry Frontmatter Schema
+type: Method
+status: Canon
+description: Specification of the structured frontmatter required in every Atlas value pattern entry. Defines the data model that supports field-relative scoring, structural axis evaluation, and downstream analytical views.
+---
+
+## Purpose
+
+This document specifies the structured frontmatter required in every Atlas entry. The frontmatter contains the atomic scoring data that constitutes the source of truth for all derived analyses — heatmaps, quadrant placements, cluster identification, ripple analysis, and any other aggregated views.
+
+Frontmatter is structured data; prose is interpretation. The narrative sections of an Atlas entry explain the patterns the frontmatter captures, but the frontmatter is the source of truth. Derived views are computed from frontmatter and never hand-maintained.
+
+## Design Principles
+
+The schema is grounded in five principles that follow from the project's quality framework.
+
+**Atomicity.** Each scoring fact is recorded once in exactly one location. No fact appears in multiple places where they could drift apart. Derived values are computed, never duplicated.
+
+**Field-relative valuation.** Value effects are not properties of patterns alone but of patterns operating in specific fields with specific bearers. The schema captures this directly through the field-bearer matrix.
+
+**Bearer-awareness.** Patterns can be carried by individual agents or by groups, and the same pattern can have different value effects depending on which bearer is operating. The schema captures the bearer dimension explicitly.
+
+**Structural separation.** Structural axis scoring (relationship to laws) and field-bearer scoring (real-world value effects) are distinct dimensions and are recorded in distinct sections of the schema. Conflating them would lose analytical resolution.
+
+**Machine-extractability.** All scoring data lives in YAML frontmatter that can be parsed by any standard tool. The schema is designed for programmatic aggregation across the Atlas without requiring custom parsers.
+
+---
+
+## Schema Structure
+
+Atlas entry frontmatter contains both metadata fields and scoring fields. Required fields are marked. All other fields are optional but expected for Canon-status entries.
+
+### Identity Fields
+
+```yaml
+title: "string"                    # Human-readable title (required)
+atlas_id: "VA-XXX-NNN"             # Stable identifier matching pattern VA-[NAME]-NN (required)
+status: "Draft|Reviewed|Canon|Deprecated"  # Lifecycle status (required)
+type: "Atlas Entry"                # Content type (required)
+version: "string"                  # Semantic version (required)
+```
+
+### Level Placement Fields
+
+```yaml
+primary_level: "physical|biological|social|intellectual"  # Primary MOQ level (required)
+secondary_levels: ["level1", "level2"]                    # List of secondary levels (optional)
+```
+
+### Bearer Applicability Field
+
+```yaml
+bearer_applicability: "agent_only|group_only|both"  # Which bearer dimensions are meaningful (required)
+```
+
+This field declares which bearer dimensions are meaningful for the pattern. Most patterns will be `both` — they can be carried by individual agents or by groups, with different effects. Some patterns are inherently individual (Pride, Lust, Greed) and should be `agent_only`. Some patterns are inherently collective (Solidarity, Myth as a structural pattern) and should be `group_only`.
+
+When `agent_only` is declared, the `group_carried` row of the field-bearer matrix is omitted. When `group_only` is declared, the `agent_carried` row is omitted. When `both` is declared, both rows are populated.
+
+### Level Scores Field
+
+```yaml
+level_scores:
+  physical: 0      # Score 0-2: 0 = no functional role, 1 = secondary role, 2 = core role
+  biological: 1
+  social: 2        # Must match primary_level placement (score 2)
+  intellectual: 1
+```
+
+Scores reflect functional role at each level, not importance or moral weight. Exactly one level must score 2 and must match the declared `primary_level`. Score range is 0 to 2.
+
+### Structural Axis Profile Field
+
+```yaml
+structural_axis_profile:
+  physical:        # Optional unless physical score is 1 or 2
+    L-P-01: 1
+    L-P-02: 0
+    # ... all relevant physical laws
+  biological:
+    L-B-01: 1
+    L-B-02: 0
+    # ... all relevant biological laws
+  social:
+    L-S-01: 2      # Hierarchy
+    L-S-02: 1      # Loyalty
+    L-S-03: 1      # Reciprocity
+    L-S-04: 1      # Protection
+    L-S-05: 2      # Continuity
+    L-S-06: 2      # Sanction
+    L-S-07: 2      # Myth
+  intellectual:    # Optional unless intellectual score is 1 or 2
+    L-I-01: 0
+    # ... all relevant intellectual laws
+```
+
+The structural axis profile scores the pattern against each Law within each level where it has functional role. Score range is 0 to 2. Scores reflect the pattern's structural contribution: 0 = does not engage with this axis, 1 = secondary contribution, 2 = core contribution.
+
+A level's structural axis profile is required if the level's score is 1 or 2. A level's structural axis profile may be omitted if the level's score is 0.
+
+### Field-Bearer Matrix Field
+
+```yaml
+field_bearer_matrix:
+  agent_carried:
+    internal: 2     # Score -2 to +2: real-world value effect in this field
+    allied: 1
+    neutral: 1
+    hostile: 1
+  group_carried:
+    internal: 2
+    allied: 1
+    neutral: 1
+    hostile: 1
+```
+
+The field-bearer matrix scores the pattern's directional value effects across two bearer dimensions and four field dimensions. Score range is -2 to +2.
+
+Score interpretation:
+- **+2** — strong positive value effect (the field's value field is significantly enhanced)
+- **+1** — positive value effect
+- **0** — neutral or negligible effect
+- **-1** — negative value effect
+- **-2** — strong negative value effect (the field's value field is significantly degraded)
+
+The four fields are:
+
+- **Internal** — those whose value experience depends on the bearer (unchosen, hard to exit)
+- **Allied** — those with active committed engagement in the bearer's success (chosen, invested)
+- **Neutral** — those without active commitment to the bearer (observers, judging through reputation)
+- **Hostile** — those whose interests run counter to the bearer (counter-aligned, regardless of active opposition)
+
+The two bearer dimensions are:
+
+- **agent_carried** — the pattern is operating through an individual agent acting in their own capacity
+- **group_carried** — the pattern is operating through a group, or through an agent acting as a representative of the group
+
+If `bearer_applicability: agent_only`, the `group_carried` row is omitted. If `bearer_applicability: group_only`, the `agent_carried` row is omitted.
+
+Cells may be marked `null` (rather than scored) where the bearer-field combination is genuinely degenerate for the pattern in question — meaning not just neutral (which scores 0) but structurally undefined for that pattern.
+
+### Canon Lifecycle Fields
+
+```yaml
+canon_declared: "YYYY-MM-DD"       # Date of Canon declaration (required when status is Canon)
+last_revised: "YYYY-MM-DD"         # Date of last substantive revision (required)
+revision_history:                  # List of revisions with dates and brief descriptions
+  - date: "YYYY-MM-DD"
+    version: "1.0"
+    description: "Initial draft"
+  - date: "YYYY-MM-DD"
+    version: "1.1"
+    description: "Boundary clarification"
+```
+
+---
+
+## Complete Example
+
+Putting all fields together for the Honor entry:
+
+```yaml
+---
+title: "Honor"
+atlas_id: "VA-HON-001"
+status: "Reviewed"
+type: "Atlas Entry"
+version: "2.0"
+
+primary_level: "social"
+secondary_levels: ["biological", "intellectual"]
+bearer_applicability: "both"
+
+level_scores:
+  physical: 0
+  biological: 1
+  social: 2
+  intellectual: 1
+
+structural_axis_profile:
+  biological:
+    L-B-01: 0
+    L-B-02: 0
+    L-B-03: 0
+    L-B-04: 1
+    L-B-05: 0
+  social:
+    L-S-01: 2
+    L-S-02: 1
+    L-S-03: 1
+    L-S-04: 1
+    L-S-05: 2
+    L-S-06: 2
+    L-S-07: 2
+  intellectual:
+    L-I-01: 0
+    L-I-02: 1
+    L-I-03: 0
+    L-I-04: 0
+    L-I-05: 1
+    L-I-06: 1
+    L-I-07: 0
+    L-I-08: 0
+
+field_bearer_matrix:
+  agent_carried:
+    internal: 2
+    allied: 1
+    neutral: 1
+    hostile: 1
+  group_carried:
+    internal: 2
+    allied: 2
+    neutral: 1
+    hostile: 0
+
+canon_declared: null
+last_revised: "2026-05-01"
+revision_history:
+  - date: "2026-02-16"
+    version: "1.0"
+    description: "Initial draft"
+  - date: "2026-02-16"
+    version: "1.1"
+    description: "Boundary clarification vs Integrity and Dignity"
+  - date: "2026-02-16"
+    version: "1.2"
+    description: "Canon designation"
+  - date: "2026-05-01"
+    version: "2.0"
+    description: "Restructured against revised Atlas template; status returned to Reviewed pending Canon re-evaluation"
+---
+```
+
+---
+
+## Validation Rules
+
+The schema supports automated validation against the following rules. Validation tooling (per the agent system design document) should enforce these rules before any Canon promotion.
+
+### Required Field Validation
+
+- `title`, `atlas_id`, `status`, `type`, `version` must be present
+- `primary_level` must be present and must be one of the four valid level values
+- `bearer_applicability` must be present and must be one of the three valid values
+- `level_scores` must be present with all four levels populated
+- `structural_axis_profile` must be present for every level where `level_scores` is 1 or 2
+- `field_bearer_matrix` must be present with bearer rows matching `bearer_applicability`
+
+### Score Range Validation
+
+- All `level_scores` values must be integers in the range [0, 2]
+- All `structural_axis_profile` values must be integers in the range [0, 2]
+- All `field_bearer_matrix` values must be integers in the range [-2, 2] or `null`
+
+### Consistency Validation
+
+- The level identified by `primary_level` must score 2 in `level_scores`
+- Exactly one level must score 2 in `level_scores` (no multiple primaries)
+- Levels listed in `secondary_levels` must score 1 in `level_scores`
+- All laws within a level's `structural_axis_profile` must be present (no partial coverage)
+- Law IDs must match the canonical pattern (`law-p-NN`, `law-b-NN`, `law-s-NN`, `law-i-NN`)
+- If `bearer_applicability` is `agent_only`, `group_carried` must be absent
+- If `bearer_applicability` is `group_only`, `agent_carried` must be absent
+- If `bearer_applicability` is `both`, both bearer rows must be present
+
+### Canon-Specific Validation
+
+When `status` is `Canon`:
+- `canon_declared` must be present
+- All preceding required fields must be valid
+- Entry must satisfy all criteria in `canon-promotion-checklist.mdx`
+- Entry must contain all 12 canonical sections (per the revised construction method)
+
+---
+
+## Computed Fields
+
+The following fields are derivable from the frontmatter and should not be stored. They are computed by analytical tooling that aggregates across all Atlas entries.
+
+**Structural axis sum (per level)** — sum of all structural axis scores within a level. Indicates the pattern's overall structural contribution at that level.
+
+**Cross-level structural sum** — sum of structural axis scores across all levels. A summary of the pattern's total structural footprint.
+
+**Field ripple sum (per bearer)** — sum of field-bearer matrix scores for one bearer across all four fields. Indicates the net value effect of the pattern when carried by that bearer.
+
+**Asymmetry score** — difference between agent ripple sum and group ripple sum. Indicates how differently the pattern operates depending on bearer.
+
+**Hostile-internal differential** — difference between internal score and hostile score for each bearer. Indicates the pattern's polarisation effect across friend-enemy distinction.
+
+**Quadrant placement** — calculated from the structural axis sum and field ripple sums per the project's quadrant methodology. Replaces hand-typed quadrant assignments.
+
+**Coordination field score** — sum of internal, allied, and neutral scores per bearer. The original "Coordination Field Score" from the spreadsheet, now computed rather than hand-maintained.
+
+These computed fields appear in derived views (heatmaps, scoring tables, network graphs, cluster suggestions) but are never stored in the entry itself.
+
+---
+
+## Schema Evolution
+
+This schema is part of the project's Canon. Changes require explicit governance review and documented rationale. Adding fields is permitted with a version increment of the schema and migration of existing entries; removing fields requires deprecation following standard Canon deprecation procedures.
+
+The schema version is tracked in this document's frontmatter. Atlas entries reference the schema version they conform to via their own version field.
+
+Current schema version: 1.0.
+
+---
+
+## Maintenance Note
+
+This schema is the source of truth for what Atlas entry frontmatter must contain. The conceptual model (`moq-values-matter-conceptual-model.json`) references this schema as the authoritative specification for `AtlasEntry` properties. The Atlas value construction method document references this schema for required frontmatter content.
+
+If any of these documents drift from the schema, this schema governs.

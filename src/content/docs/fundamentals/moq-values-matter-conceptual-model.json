@@ -1,0 +1,542 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://moq-values-matter.org/schemas/conceptual-model-v1.json",
+  "title": "MOQ Values Matter — Conceptual Model",
+  "description": "Conceptual schema defining the project's architecture: entity types, relationships, and constraints. This is a type-level model — it does not enumerate specific instances of laws, glossary entries, or Atlas entries. Instances live in the project's MDX files.",
+  "version": "1.0.0",
+  "status": "Canon",
+  "scope": "Architectural skeleton. Stable across instance changes. Updated only when the project's underlying conceptual structure shifts.",
+
+  "foundationalAxioms": {
+    "description": "Non-negotiable foundational claims grounding the entire model. These are not derived from other elements; they ground the rest.",
+    "axioms": [
+      {
+        "id": "AX-01",
+        "statement": "Value is the primary organising principle of reality, prior to subject-object division.",
+        "source": "Pirsig, Metaphysics of Quality"
+      },
+      {
+        "id": "AX-02",
+        "statement": "Reality consists of static value patterns and Dynamic Quality.",
+        "source": "Pirsig, Metaphysics of Quality"
+      },
+      {
+        "id": "AX-03",
+        "statement": "Static value patterns operate at four levels in moral hierarchy: Physical, Biological, Social, Intellectual.",
+        "source": "Pirsig, Metaphysics of Quality"
+      },
+      {
+        "id": "AX-04",
+        "statement": "Higher levels have moral precedence over lower levels but depend on them for substrate.",
+        "source": "Pirsig, Metaphysics of Quality"
+      },
+      {
+        "id": "AX-05",
+        "statement": "Dynamic Quality cannot be defined, operationalised, or systematised. It is the pre-conceptual source of novelty, recognisable only after stabilisation into static patterns.",
+        "source": "Project constraint, derived from Pirsig"
+      },
+      {
+        "id": "AX-06",
+        "statement": "Stories, narratives, myths, and symbolic meaning are always social-level patterns, never intellectual-level patterns.",
+        "source": "Project boundary commitment"
+      }
+    ]
+  },
+
+  "ontology": {
+    "description": "Type definitions for entities in the project. Each entity type defines what kind of thing it is, its required properties, and its constraints.",
+
+    "Quality": {
+      "type": "FoundationalConcept",
+      "definition": "The primary reality from which subjects and objects arise. Pre-intellectual, recognisable but not fully definable.",
+      "instantiable": false,
+      "operationalisable": false,
+      "manifestations": ["DynamicQuality", "StaticPattern"]
+    },
+
+    "DynamicQuality": {
+      "type": "PreConceptualSource",
+      "definition": "The pre-conceptual source of novelty, change, and moral progress.",
+      "instantiable": false,
+      "operationalisable": false,
+      "definable": false,
+      "diagrammable": false,
+      "treatableAsMechanism": false,
+      "treatableAsMethod": false,
+      "treatableAsLens": false,
+      "treatableAsFramework": false,
+      "treatableAsDriver": false,
+      "constraints": [
+        "May only be referenced as the pre-conceptual source",
+        "Recognisable only after passing into static patterns",
+        "Not equivalent to creativity, exploration, or novelty as behaviours",
+        "Cannot be the mechanism through which any process operates"
+      ],
+      "rationale": "AX-05 — most easily violated constraint in the project; requires active guarding."
+    },
+
+    "StaticPattern": {
+      "type": "ValuePatternCategory",
+      "definition": "Stabilised forms of value that emerge from Dynamic Quality and persist over time.",
+      "scope": "Operates at one of four MOQ levels",
+      "subtypes": ["Law", "AtlasEntry"],
+      "constraints": [
+        "Must be located at exactly one primary MOQ level",
+        "Quality is partially constituted by structural conformance, not separate from it"
+      ]
+    },
+
+    "Level": {
+      "type": "MOQLevel",
+      "definition": "One of four ordered levels at which static value patterns operate.",
+      "instances": ["Physical", "Biological", "Social", "Intellectual"],
+      "properties": {
+        "ordinalPosition": "integer (1-4)",
+        "moralPrecedenceOver": "lower-numbered levels",
+        "substrateDependencyOn": "lower-numbered levels",
+        "conditionalPrecedence": "Precedence applies when lower-level patterns are functioning; intellectual precedence over social applies only when intellectual patterns meet their structural conditions"
+      },
+      "hierarchy": {
+        "Physical": {
+          "ordinal": 1,
+          "mode": "Passive persistence within conservation constraints",
+          "dependsOn": null,
+          "moralPrecedenceOver": []
+        },
+        "Biological": {
+          "ordinal": 2,
+          "mode": "Active resistance to entropy through self-maintenance",
+          "dependsOn": "Physical",
+          "moralPrecedenceOver": ["Physical"]
+        },
+        "Social": {
+          "ordinal": 3,
+          "mode": "Multi-agent coordination through structural axes",
+          "dependsOn": "Biological",
+          "moralPrecedenceOver": ["Physical", "Biological"]
+        },
+        "Intellectual": {
+          "ordinal": 4,
+          "mode": "Symbolic operation maintaining quality through structural conditions",
+          "dependsOn": "Social",
+          "moralPrecedenceOver": ["Physical", "Biological", "Social"],
+          "precedenceConditional": "Earned through meeting intellectual structural conditions; not automatic"
+        }
+      },
+      "crossLevelRules": [
+        "Higher levels cannot originate lower-level patterns — they cannot bring into existence what the lower level has not produced as substrate",
+        "Higher levels can stabilise, constrain, formalise, distort, or modulate lower-level patterns — this is legitimate cross-level interaction, not a hierarchy violation",
+        "Lower levels enable higher levels by providing substrate, but do not produce them — biological cooperation does not create social patterns by itself; social organisation does not create intellectual patterns by itself",
+        "Reductionism across levels is prohibited — a higher level cannot be explained as merely a configuration of the lower level it depends on",
+        "What is high quality at one level is not necessarily high quality at another level, and may be the opposite — quality is level-relative even though the levels exist in holistic relation"
+      ]
+    },
+
+    "Law": {
+      "type": "StructuralAxis",
+      "definition": "A structural axis describing a condition that any system at the relevant level must satisfy. Laws define the dimensional space within which value patterns are evaluated.",
+      "scope": "Belongs to exactly one Level",
+      "properties": {
+        "lawId": "string matching pattern law-[pbsi]-NN",
+        "level": "Level reference",
+        "title": "string",
+        "statement": "string — universal structural requirement",
+        "structuralFunction": "string — what the axis does at its level",
+        "structuralUniversality": "string — passes the universe test",
+        "failureMode": "string — how the structural mechanism breaks down",
+        "atlasCoordination": "list of AtlasEntry references with relationship notes",
+        "observableExpressions": "list of strings",
+        "moqPlacement": "string — position within the level's law system"
+      },
+      "constraints": [
+        "Must pass the universe test: would the structural requirement hold for any system at the relevant level regardless of substrate?",
+        "Must describe structural conditions, not human social patterns specifically",
+        "Must not invoke Dynamic Quality as a mechanism",
+        "Must not collapse into descriptions of one level from another level's perspective",
+        "Must distinguish description from prescription"
+      ],
+      "universeTest": {
+        "statement": "A candidate law passes if its structural requirement would hold for any system at its level — biological, social, intellectual, or physical — regardless of evolutionary path, substrate, species, or implementation.",
+        "rationale": "Distinguishes structural requirements from descriptions of human-specific or earth-specific phenomena."
+      }
+    },
+
+    "AtlasEntry": {
+      "type": "ValuePattern",
+      "definition": "A specific value pattern located within the dimensional space defined by the Laws.",
+      "scope": "Has exactly one primary Level; operates as a position within the structural axes at and across levels",
+      "properties": {
+        "atlasId": "string matching pattern VA-[NAME]-NN",
+        "title": "string",
+        "primaryLevel": "Level reference",
+        "secondaryLevels": "list of Level references",
+        "scoreProfile": "object mapping Level to score (0-2)",
+        "structuralAxisProfile": "object mapping Law to relationship (supports/undermines/transforms)",
+        "tenSectionStructure": "ordered structure with all 10 canonical sections required for Canon status"
+      },
+      "canonicalSectionOrder": [
+        "Neutral Definition",
+        "Multi-Level Evaluation",
+        "Multi-Level Coherence Analysis",
+        "Relational Impact Map",
+        "Persistence Logic",
+        "Empirical Evidence",
+        "MOQ Coherence Verdict",
+        "Summary Schema",
+        "Explicit Boundary Rejections",
+        "Canon Status & Revision Notes"
+      ],
+      "qualityDefinition": "An Atlas entry's quality is its profile across the structural axes (Laws), not a single number. A pattern that supports multiple structural axes simultaneously without trade-offs is high quality; a pattern that serves some axes at the cost of others produces specific structural distortions and is lower quality.",
+      "constraints": [
+        "Must follow the 10-section canonical structure for Canon status",
+        "Must declare exactly one primary Level (score = 2)",
+        "Must include explicit boundary rejections",
+        "Must identify failure modes",
+        "Must not invoke Dynamic Quality as a mechanism",
+        "Score profile must reflect functional role, not importance or moral weight"
+      ]
+    },
+
+    "GlossaryEntry": {
+      "type": "AtomicDefinition",
+      "definition": "A deep-linkable atomic definition of a term used across the project.",
+      "properties": {
+        "title": "string",
+        "layer": "Layer reference",
+        "status": "Status reference",
+        "tier": "1 (full definition) or 2 (pointer to Atlas)",
+        "relatedAtlas": "optional AtlasEntry reference for Tier 2 entries"
+      },
+      "tiers": {
+        "Tier1": {
+          "description": "Full definition — used for terms that have no Atlas entry. Includes precise functional definition, explicit not-statements establishing context against conventional thinking, and role within the project.",
+          "appliesTo": ["MOQ Foundation terms", "Project-defined diagnostic terms", "Circle/Ripple Theory terms"]
+        },
+        "Tier2": {
+          "description": "Thin pointer — short summary plus link to Atlas entry where the full definition lives.",
+          "appliesTo": ["Terms that have full Atlas entries"]
+        }
+      }
+    },
+
+    "Layer": {
+      "type": "ScopeClassification",
+      "definition": "Classification indicating the scope and origin of a glossary entry or other element.",
+      "instances": {
+        "MOQ Foundation": {
+          "description": "Pirsig's core concepts; cannot be redefined by this project",
+          "examples": ["Quality", "Dynamic Quality", "Static Patterns", "the four Levels"]
+        },
+        "Project-Wide": {
+          "description": "Shared vocabulary across the full project, defined by this project",
+          "examples": ["Canon", "Meaning", "Field-Relative Valuation"]
+        },
+        "Circle/Ripple Theory": {
+          "description": "Scoped to the supplementary Circle/Ripple Theory only",
+          "examples": ["Value Node", "Ripple", "Circle", "Keychain"]
+        }
+      }
+    },
+
+    "Status": {
+      "type": "LifecycleClassification",
+      "definition": "Current standing of an entry within the project's governance system.",
+      "instancesByContextType": {
+        "AtlasEntry": ["Draft", "Reviewed", "Canon", "Deprecated"],
+        "GlossaryEntry": ["Canon", "Exploratory", "Deprecated"],
+        "GovernanceDocument": ["Canon"],
+        "Essay": ["Exploratory"],
+        "Method": ["Exploratory", "Canon"],
+        "CircleRippleSupplement": ["Canon", "Exploratory"]
+      },
+      "transitions": {
+        "AtlasEntry": "Draft → Reviewed → Canon → Deprecated",
+        "promotionToCanon": "Requires explicit evaluation against the Canon Promotion Checklist and explicit Canon Declaration",
+        "deprecation": "Must be explicitly marked; silent removal prohibited"
+      },
+      "constraint": "Status values not in this list are drift errors and must be corrected. The previously used 'Canon-stable' is non-standard and must be replaced with 'Canon'."
+    },
+
+    "ContentType": {
+      "type": "EntityClassification",
+      "definition": "Machine-readable type field required in every content file's frontmatter.",
+      "instances": [
+        "Atlas Entry",
+        "Glossary Entry",
+        "Governance",
+        "Cluster",
+        "Essay",
+        "Method",
+        "Law"
+      ]
+    },
+
+    "GovernanceDocument": {
+      "type": "OperatingRules",
+      "definition": "Documents that define the project's operating rules, constraints, and procedures.",
+      "instances": [
+        "ai-instructions.mdx",
+        "canon-governance.mdx",
+        "canon-promotion-checklist.mdx",
+        "canon-value-construction-method.mdx"
+      ],
+      "authority": {
+        "ai-instructions.mdx": "Single authoritative file for AI behaviour; governs on conflict",
+        "canon-governance.mdx": "Defines what Canon is; governs on Canon-status conflicts",
+        "supplementary documents": "Apply within their stated scope only; defer to authoritative files on conflict"
+      }
+    },
+
+    "Cluster": {
+      "type": "StructuralRelationshipPage",
+      "definition": "A Canon cluster page organising structural relationships between existing Canon Atlas entries.",
+      "constraints": [
+        "References only Canon entries",
+        "Introduces no new patterns or evaluative claims",
+        "Preserves MOQ hierarchy and boundary discipline",
+        "Updated only to maintain accuracy when linked Canon entries change",
+        "Justified only when existing Canon entries exhibit a stable, recurring structural relationship that cannot be captured clearly via cross-links alone"
+      ]
+    }
+  },
+
+  "relationships": {
+    "description": "Type-level relationships between entities.",
+
+    "LawBelongsToLevel": {
+      "from": "Law",
+      "to": "Level",
+      "cardinality": "many-to-one",
+      "constraint": "Each Law belongs to exactly one Level. Laws within a level form an integrated system; no law operates independently of the others."
+    },
+
+    "AtlasEntryHasPrimaryLevel": {
+      "from": "AtlasEntry",
+      "to": "Level",
+      "cardinality": "many-to-one",
+      "constraint": "Each Atlas entry has exactly one primary Level (score = 2 in that level's row of the score profile)."
+    },
+
+    "AtlasEntryScoresAgainstLaws": {
+      "from": "AtlasEntry",
+      "to": "Law",
+      "cardinality": "many-to-many",
+      "description": "An Atlas entry has a structural axis profile expressing how it relates to each Law: supports the structural requirement, undermines it, or transforms it."
+    },
+
+    "GlossaryEntryHasLayer": {
+      "from": "GlossaryEntry",
+      "to": "Layer",
+      "cardinality": "many-to-one"
+    },
+
+    "GlossaryEntryMayPointToAtlasEntry": {
+      "from": "GlossaryEntry",
+      "to": "AtlasEntry",
+      "cardinality": "many-to-one (optional)",
+      "constraint": "Tier 2 glossary entries point to Atlas entries; Tier 1 entries do not."
+    },
+
+    "EntityHasStatus": {
+      "from": "any content entity",
+      "to": "Status",
+      "cardinality": "many-to-one",
+      "constraint": "Valid status values depend on the entity's ContentType (see Status definition)."
+    },
+
+    "EntityHasContentType": {
+      "from": "any content entity",
+      "to": "ContentType",
+      "cardinality": "many-to-one",
+      "constraint": "Required field in every content file's frontmatter."
+    },
+
+    "ClusterReferencesAtlasEntries": {
+      "from": "Cluster",
+      "to": "AtlasEntry",
+      "cardinality": "one-to-many",
+      "constraint": "Must reference two or more Canon Atlas entries; may not reference Draft or Reviewed entries."
+    },
+
+    "LevelDependsOnLowerLevel": {
+      "from": "Level",
+      "to": "Level",
+      "cardinality": "one-to-one",
+      "constraint": "Each level except Physical depends on the immediately lower level for substrate."
+    },
+
+    "LevelHasMoralPrecedenceOverLowerLevels": {
+      "from": "Level",
+      "to": "Level",
+      "cardinality": "one-to-many",
+      "constraint": "Each level has moral precedence over all lower levels, conditional on the higher level meeting its structural conditions."
+    }
+  },
+
+  "qualityArchitecture": {
+    "description": "How the entities work together to constitute the project's quality framework.",
+
+    "dimensionalSpace": {
+      "concept": "Laws define the structural axes; Atlas entries are positions within that dimensional space.",
+      "implication": "A value pattern's quality is its profile across the structural axes, not a single property of the pattern itself.",
+      "evaluation": "A pattern that supports multiple structural axes simultaneously without trade-offs is high quality. A pattern that serves some axes at the cost of others produces specific structural distortions and is lower quality."
+    },
+
+    "valueElevation": {
+      "concept": "Higher-quality patterns emerge from honest engagement of high-quality patterns at the same level.",
+      "scope": "Applies within levels (intellectual synthesis, social emergence) and across levels (level transitions in MOQ).",
+      "constraint": "Cannot be forced or scheduled; emerges as a property of how high-quality patterns relate, not as a Dynamic Quality intervention.",
+      "rationale": "Same value-elevation phenomenon that produces MOQ level transitions, occurring within levels among static patterns."
+    },
+
+    "structuralUniversality": {
+      "concept": "The universe test as quality criterion for laws.",
+      "test": "Would the structural requirement hold for any system at its level — biological, social, intellectual, or physical — regardless of evolutionary path, substrate, species, or implementation?",
+      "implication": "If a candidate law fails this test, it describes a human-specific or substrate-specific phenomenon and belongs in the Atlas, not in the Laws."
+    },
+
+    "canonAsIntellectualStaticQuality": {
+      "concept": "Canon entries are the project's own intellectual-level static patterns.",
+      "implication": "Canon governance is therefore self-referential: the project applies its own intellectual-level laws to its own knowledge production.",
+      "constraints": [
+        "Coherence: Canon entries must hold together internally (L-I-02)",
+        "Correspondence: Canon entries must remain responsive to evidence and argument (L-I-03)",
+        "Revisability: Canon retains capacity for warranted update (L-I-04)",
+        "Integrity: Canon promotion must respond to epistemic warrants, not social or institutional pressure (L-I-05)",
+        "Communication: Canon must be transmissible and testable (L-I-06)"
+      ]
+    },
+
+    "holisticSystemNature": {
+      "concept": "The MOQ hierarchy is a living, emerging, holistic structure — not a one-directional chain of causation. The four levels exist in constant relation to each other, with quality emerging from how patterns at every level interact.",
+      "rationale": "What Pirsig stated simply: something that is high quality at one level is not necessarily high quality at another level, and may be quite the opposite. But the system is whole. The elements always exist in relation to each other.",
+      "implications": [
+        "The hierarchy describes precedence under conflict, not isolation between levels",
+        "Higher levels operate on lower-level substrate continuously — modulating, formalising, stabilising it — without thereby originating it",
+        "Lower levels constrain and enable higher levels continuously — without thereby reducing them",
+        "Quality emerges from the whole pattern of interaction across levels, not from any single level operating in isolation",
+        "Cross-level interaction is essential to how the levels actually function; the hierarchy without interaction would be sterile rather than living"
+      ],
+      "commonMisreading": "The MOQ hierarchy is sometimes treated as if it forbade all higher-to-lower influence. This overstates the prohibition. What MOQ forbids is reduction (explaining a higher level as merely a configuration of a lower one) and origination (treating a higher level as the source of a lower-level pattern). What MOQ permits and requires is continuous cross-level interaction — what philosophy of mind sometimes calls 'downward causation' — through which higher levels operate on the substrate they depend on.",
+      "qualityIsLevelRelative": {
+        "principle": "What is high quality at one level may be low quality at another level — sometimes the opposite. A biologically high-quality response (immediate aggression to threat) may be socially destructive. A socially high-quality compliance (loyalty to corrupt authority) may be intellectually degrading. A intellectually high-quality challenge (questioning founding assumptions) may be socially destabilising in ways that warrant their own caution.",
+        "implication": "Atlas entries must therefore be evaluated across all levels, not just the level of their primary placement. A pattern's full quality profile is its score across the structural axes at every level it interacts with — primary, secondary, and constraint."
+      }
+    }
+  },
+
+  "boundaryConstraints": {
+    "description": "Constraints that prevent category errors and protect the project's coherence.",
+
+    "dynamicQualityProtection": {
+      "rule": "Dynamic Quality cannot be defined, operationalised, modularised, treated as a method, framework, lens, mechanism, or driver.",
+      "rationale": "Most easily violated constraint; foundational to MOQ integrity.",
+      "permittedReferences": [
+        "As pre-conceptual source of novelty",
+        "Recognisable only after passing into static patterns"
+      ],
+      "prohibitedReferences": [
+        "DQ as mechanism through which a process operates",
+        "DQ as driver of adaptation, synthesis, or revision",
+        "DQ as something that can be 'applied', 'used', 'implemented', or 'accessed'",
+        "DQ as equivalent to creativity, exploration, or novelty as behaviours"
+      ]
+    },
+
+    "levelDiscipline": {
+      "rule": "MOQ levels must not be collapsed into one another, but they interact continuously across the hierarchy.",
+      "specificConstraints": [
+        "Stories, narratives, myths, and symbolic meaning are always social-level, never intellectual-level",
+        "Higher levels cannot originate lower-level patterns — they may modulate, formalise, or constrain them, but cannot bring them into existence as substrate",
+        "Intellectual analysis does not override physical, biological, or social realities — it operates within and on them",
+        "Social patterns do not produce intellectual truth; intellectual patterns do not produce social cohesion — but each can support or degrade the other through legitimate cross-level interaction",
+        "Reductionism across levels is prohibited: no level can be explained as merely a configuration of the level it depends on"
+      ]
+    },
+
+    "canonProtection": {
+      "rule": "Canon status must be earned through explicit governance procedures.",
+      "specificConstraints": [
+        "No silent promotion to Canon",
+        "No silent edit of Canon meaning",
+        "Canon revision requires documented rationale",
+        "Canon deprecation requires explicit marking; silent removal prohibited"
+      ]
+    },
+
+    "descriptionVsPrescription": {
+      "rule": "Laws and Atlas entries describe how value patterns function structurally; they do not prescribe what individuals should do.",
+      "rationale": "Prescriptive framing imports moral-level claims into structural-level analysis."
+    },
+
+    "polemicalLevelFraming": {
+      "rule": "Laws and Atlas entries should describe levels and their relationships without polemical framing of one level against another.",
+      "rationale": "The MOQ levels operate in hierarchy with conditional precedence; they are not in opposition. Polemical framing imports a fight that does not belong in foundational descriptions."
+    }
+  },
+
+  "vocabularyConventions": {
+    "description": "Required vocabulary and conventions for project content.",
+
+    "lawIdConvention": {
+      "pattern": "law-[pbsi]-NN",
+      "instances": {
+        "Physical": "law-p-01 through law-p-06 (six laws)",
+        "Biological": "law-b-01 through law-b-05 (five laws)",
+        "Social": "law-s-01 through law-s-07 (seven laws)",
+        "Intellectual": "law-i-01 through law-i-08 (eight laws)"
+      },
+      "constraint": "Law IDs must remain stable across edits. Renumbering is prohibited."
+    },
+
+    "fileTypeStandard": {
+      "default": ".mdx",
+      "rationale": "Supports embedded diagrams and visuals; compatible with Starlight"
+    },
+
+    "anchorSyntax": {
+      "required": "<a id=\"section-id\"></a>",
+      "prohibited": "{#id} heading syntax",
+      "rationale": "MDX-safe deep-linking pattern"
+    },
+
+    "linkStyle": {
+      "preferred": "Absolute site paths with anchors: /fundamentals/laws/social/#law-s-04",
+      "prohibited": "Relative paths that break if files move; raw URLs inside Canon content"
+    }
+  },
+
+  "supplementaryScope": {
+    "description": "Scope of supplementary documents.",
+
+    "circleRippleTheory": {
+      "scope": "Supplementary theory authored by Kim Roar Spørkel, applying within its stated scope only",
+      "authority": "Defers to ai-instructions.mdx and core governance documents on any conflict",
+      "elements": [
+        "Value Node, Becoming Value Node, Ripple, Circle, Keychain",
+        "Value Field, Zone of Value Resonance",
+        "Priming, Reserves, Trust, Reciprocity, Power, Enforcement, Coercion",
+        "Collapse, Repair, Forgiveness, Re-entry"
+      ]
+    }
+  },
+
+  "attribution": {
+    "foundationAuthor": "Robert Pirsig",
+    "projectAuthor": "Kim Roar Spørkel",
+    "boundary": "Pirsig provides the Metaphysics of Quality foundation. All metaphors, diagrams, terminology, and operational models beyond MOQ are authored by this project.",
+    "responsibility": "Responsibility for everything beyond Pirsig's original philosophy belongs entirely to the project author."
+  },
+
+  "modelMaintenance": {
+    "description": "Rules for maintaining this model itself.",
+    "stability": "This model describes architecture, not instances. It changes only when the project's underlying conceptual structure shifts.",
+    "outOfScope": [
+      "Specific law instances and their full text",
+      "Specific glossary entries and their definitions",
+      "Specific Atlas entries and their score profiles",
+      "Operational state of the project (which entries are Canon, Draft, etc.)"
+    ],
+    "rationale": "Mixing schema with instances couples architectural stability to operational activity in a way that obscures which is which. The model defines the project's grammar; instances live in the project's MDX files."
+  }
+}
