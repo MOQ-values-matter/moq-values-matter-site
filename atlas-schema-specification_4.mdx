@@ -1,0 +1,1121 @@
+---
+title: "MOQ Values Matter — Data Architecture and Schema Specification"
+description: Foundational schema specification for the project's four-artifact-type data architecture under the unified framework. Defines pattern entries, relation records, narrative articulations, and controlled vocabularies, with their structures, governance, and the graph operations they enable. v0.5 integrates the dynamics framework v1.2: binding committed as formal relation type with binding_kind sub-vocabulary, companion_relation field, multi-dimensional binding characterisation, and the cost_source candidate resolved as a binding_kind value.
+type: Method
+status: Exploratory
+version: 0.5
+sidebar:
+  order: 110
+---
+
+{/* STATUS: EXPLORATORY */}
+
+## Purpose of This Document
+
+This specification defines the **data architecture** for the MOQ Values Matter project's Atlas under the unified framework. It exists because the framework's analytical capacity is currently locked inside prose entries, where relations between patterns are real but not addressable, structural-type analogies are observable case by case but not queryable, and graph navigation is not possible.
+
+The specification establishes four artifact types — pattern entries, relation records, narrative articulations, and controlled vocabularies — and describes how each is structured, governed, and used. Together they form a data architecture in which the framework's analytical primitives become operationally available: graph navigation across patterns, typed queries for structural views, cross-pattern signature analysis, and consistency checking become possible because the underlying data is structured.
+
+This specification is exploratory. It is offered as a working design that the project can stress-test, refine, and eventually commit to. The decisions it embodies are reversible until the data architecture is operationally adopted. The schemas it defines are starting points, not final commitments.
+
+The specification has been written after four framework stress tests and one constructive test (the Reciprocity Atlas entry), all of which confirmed that the framework's primitives are adequate for analytical work and that laws can be removed as structural scaffolding. This specification is the next foundational step: making the framework's analytical capacity operationally available through structured data.
+
+---
+
+<a id="reading-guide"></a>
+## Reading Guide
+
+The specification is organised into nine sections:
+
+- **Section 1** describes the four-artifact architecture and its rationale.
+- **Section 2** specifies the pattern entry schema.
+- **Section 3** specifies the relation record schema.
+- **Section 4** specifies the narrative articulation conventions.
+- **Section 5** specifies the controlled vocabularies and their governance.
+- **Section 6** describes the graph operations the architecture enables.
+- **Section 7** addresses migration from the existing Atlas structure.
+- **Section 8** addresses governance: how each artifact type is promoted, revised, deprecated.
+- **Section 9** identifies what is deferred and what may need to be added later.
+
+A reader implementing the schema needs Sections 2 through 5. A reader interested in what the architecture enables should read Section 6. A reader concerned with how the project moves from current state to the new architecture should read Sections 7 and 8.
+
+---
+
+<a id="section-1-architecture"></a>
+## 1. The Four-Artifact Architecture
+
+The architecture distinguishes four kinds of artifact, each with its own structure, purpose, and governance.
+
+**Pattern entries** are the nodes of the framework's structural graph. Each pattern entry describes one pattern — its mode of realisation, its internal constituents, its dispositions, its profile-coherence, its persistence character, its degradation conditions. The pattern entry is uniform in structure across the Atlas; what varies is its content. Pattern entries are the most stable artifact type because patterns themselves are stable under the framework's analysis.
+
+**Relation records** are the typed edges of the framework's structural graph. Each relation record describes one relation between two patterns (or between a pattern and a field-position-type). The relation has a type (substrate-dependence, modulation, composition, etc.), a character (supportive, distorting, corrective, consonant, dissonant, etc.), and conditions under which it holds. Relation records are less stable than pattern entries because they may need to be updated as patterns evolve, but more stable than narrative articulations.
+
+**Narrative articulations** are the prose layer that contextualises both. Each narrative articulation accompanies one pattern entry, providing the analytical depth, examples, comparisons, and interpretive context that structured data cannot carry. The narrative articulation cross-references pattern entries and relation records by ID but does not duplicate their structured data. Narrative articulations are the least stable artifact type, evolving as the project's analytical understanding deepens.
+
+**Controlled vocabularies** are the named lists that constrain what structured fields can contain. Stratum names, relation types, character values, field-position-types, profile-coherence dimensions — each is a small list of recognised values that the schema fields draw from. Controlled vocabularies are highly stable; changes to them affect every pattern entry and relation record that references them.
+
+These four artifact types are not interchangeable. A piece of analytical content belongs in exactly one type based on what kind of content it is: structured property of a pattern (pattern entry), structured relation between patterns (relation record), prose analysis (narrative articulation), or recognised value in a constrained list (controlled vocabulary).
+
+---
+
+<a id="rationale"></a>
+### 1.1 Rationale for the Split
+
+The split exists because the project's analytical work has different kinds of content with different stability requirements and different uses.
+
+Pattern properties are structurally stable and uniform across the Atlas. They should be addressable individually (the framework's primitives are clear about what each property is), queryable (the project needs to ask questions like "what patterns have dissonant internal composition"), and version-controlled (a pattern's structured properties should not drift silently). Structured fields are the right form for this content.
+
+Relations between patterns are structural facts that need to be queryable as a graph. The framework's most distinctive analytical capabilities — cross-stratum structural-type recognition, substrate-chain traversal, modulation-cascade analysis — depend on relations being addressable as typed edges, not as prose mentions of pattern names within other entries. Relation records are the right form.
+
+Narrative analysis is irreducibly prose. The examples, comparisons, historical context, and interpretive nuance that give a pattern its texture cannot be reduced to fields without losing what they were saying. Narrative articulation preserves this. But it should not also carry the structured data, because then the structured data is locked inside prose and cannot be operated on.
+
+Controlled vocabularies exist because consistency across the Atlas matters. If "supportive" and "stabilising" and "constructive" are all used interchangeably for the character of a modulation relation, the data becomes inconsistent and queries become unreliable. Constrained vocabularies prevent this. They also make the framework's commitments explicit: there are exactly three modulation kinds (supportive, distorting, corrective), and the Atlas reflects this through enforcement, not just convention.
+
+---
+
+<a id="cross-references"></a>
+### 1.2 Cross-References Between Artifact Types
+
+The artifact types reference each other but do not duplicate each other:
+
+A pattern entry references the controlled vocabularies for its field values (its primary stratum is drawn from the stratum vocabulary; its profile-coherence character values are drawn from the character vocabulary). It does not embed relation records inline; it references them by ID.
+
+A relation record references its source and target patterns by ID. It draws from the controlled vocabularies for its type and character fields. It does not duplicate description of the patterns it relates.
+
+A narrative articulation references its accompanying pattern entry by ID and references relation records by ID. It does not duplicate the structured properties of the pattern or the structured relations. The narrative is free to discuss them, contextualise them, draw examples, and develop the analytical argument — but the data itself lives in the structured artifacts.
+
+This cross-reference structure means that updating one artifact does not require updating others, unless the update changes the underlying structural reality. A pattern entry's profile-coherence may be revised based on new analysis; the relation records pointing at that pattern do not need to change unless the new analysis affects them. The narrative articulation may evolve continuously without requiring structural updates.
+
+---
+
+<a id="file-layout"></a>
+### 1.3 Production File Layout and Folder Convention
+
+Each pattern is a **folder**, named by atlas_id, containing all artifacts that belong to that pattern. The Atlas content root (`src/content/docs/atlas/`) contains one folder per pattern rather than one file per pattern.
+
+```
+atlas/
+  VA-COE-001/
+    pattern.mdx              # Structured frontmatter + narrative articulation
+    relations/
+      REL-SUB-COE-FEA-001.yaml
+      REL-SUB-COE-PWR-001.yaml
+      REL-COM-COE-CCC-001.yaml
+      REL-FRE-COE-ALL-001.yaml
+      ...
+  VA-POW-001/
+    pattern.mdx
+    relations/
+      REL-SUB-POW-PHI-001.yaml
+      REL-COM-POW-CST-001.yaml
+      REL-BND-POW-REC-001.yaml
+      ...
+  VA-REC-001/
+    pattern.mdx
+    relations/
+      ...
+```
+
+**Pattern entry:** Each folder contains exactly one `pattern.mdx` file. This is the structured frontmatter (YAML) plus the narrative articulation (MDX content), in a single file. It renders in Starlight as the pattern's page.
+
+**Relation records:** Each folder contains a `relations/` subfolder holding individual `.yaml` files, one per relation record. Relation records are structured data the graph layer consumes; they are not rendered as site pages. Each file is named by its `relation_id`.
+
+**Relation record placement rule:** A relation record lives in the **source pattern's** folder — the pattern from which the relation originates. For asymmetric relations (substrate-dependence, modulation, composition, field-relative-effect, substitution), the source is defined by the relation type's directionality (§3.3). For symmetric relations (field-co-occurrence, structural-type-analogy), the record lives in the folder of whichever pattern has the alphabetically earlier atlas_id.
+
+Each relation record exists in exactly **one** folder. It is never duplicated. Graph tooling assembles the full graph by traversing the `relations/` subfolders across all pattern folders; every record is found regardless of which folder it is in.
+
+**Controlled vocabularies:** Vocabulary definitions live in a single version-controlled file outside the pattern folders — in the governance directory (`src/content/docs/governance/controlled-vocabularies.yaml` or equivalent). They are not duplicated per pattern.
+
+**Rationale.** The folder-per-pattern layout replaces the flat file-per-pattern layout used by the existing Atlas. The flat layout was adequate when each pattern was a single `.mdx` file; under the four-artifact architecture, each pattern produces multiple files, and a flat folder would become unnavigable. The folder layout keeps each pattern self-contained while making the full graph assemblable by traversal.
+
+---
+
+<a id="section-2-pattern-entry-schema"></a>
+## 2. Pattern Entry Schema
+
+A pattern entry is a structured record of one pattern's properties. It is expressed as YAML frontmatter and structured fields. The accompanying narrative articulation (Section 4) is in the same file but conceptually separate.
+
+---
+
+<a id="pattern-required-fields"></a>
+### 2.1 Required Fields
+
+Every pattern entry must include the following fields.
+
+**`atlas_id`** — Unique identifier following the convention `VA-[NAME]-NNN` where NAME is a short uppercase pattern name and NNN is a three-digit sequence number. Example: `VA-REC-001` for Reciprocity. Once assigned, the atlas_id is permanent and is the primary reference handle for the pattern.
+
+**`title`** — Human-readable name of the pattern. Example: "Reciprocity". Used in display contexts and narrative cross-references.
+
+**`primary_stratum`** — One value from the stratum controlled vocabulary (`physical`, `biological`, `social`, `intellectual`). The primary stratum is where the pattern's core mode of realisation operates. Exactly one primary stratum per pattern.
+
+**`secondary_strata`** — A list of zero or more stratum values where the pattern has substantial engagement (substrate dependence, significant modulation, field operation). A pattern at the social stratum may have biological secondary engagement if its operation depends on or substantially modulates biological patterns.
+
+**`mode_of_realisation`** — A short prose statement (one to three sentences) describing how the pattern realises itself in its primary stratum's mode of becoming. This is a structured field but contains prose; the prose follows specific conventions (describes the realisation, does not argue for the pattern's value).
+
+**`status`** — Lifecycle status: `Draft`, `Reviewed`, `Canon`, or `Deprecated`. Status reflects the pattern entry's standing in the Atlas governance.
+
+**`version`** — Numeric version (e.g., `0.1`, `1.0`, `1.1`). Versioning supports tracking of changes; major version increments indicate substantial revisions.
+
+**`type`** — Always `Atlas Entry` for pattern entries. Distinguishes this artifact type from others in the same content directory if needed.
+
+---
+
+<a id="pattern-internal-composition"></a>
+### 2.2 Internal Composition Fields
+
+If the pattern has internal compositional structure (is composed of other patterns), the following fields are required. If the pattern has no internal composition (it is at the smallest analysed scale), these fields are omitted.
+
+**`constituents`** — A list of pattern atlas_ids that are constituents of this pattern. Each constituent is itself a pattern with its own entry. Example for Reciprocity: `[VA-GIV-001, VA-EXP-001, VA-TRA-001, VA-TRU-001, VA-SAN-001]` if entries for Giving, Expectation-of-Return, Tracking, Trust, and Sanctioning exist. If some constituents do not yet have entries, they may be listed as named placeholders with the understanding that they will be migrated to atlas_ids when entries are created.
+
+**`compositional_character`** — One value from the composition character controlled vocabulary (`consonant`, `dissonant`, `mixed`, `internally_consonant_externally_dissonant`). The character describes how the constituents stand in mutual relation. The `internally_consonant_externally_dissonant` value captures the distinctive structural type identified in the framework's stress tests (coercion, captured reciprocity, cancer at biology).
+
+**`compositional_notes`** — A short prose field (one paragraph) describing the specific character of the internal composition. This is where the conditional aspects (consonant under these conditions, dissonant under those) are expressed. Optional; included when the compositional character requires elaboration.
+
+---
+
+<a id="pattern-bearer-mode"></a>
+### 2.3 Bearer Mode Fields
+
+**`bearer_mode`** — One value from the bearer mode controlled vocabulary:
+- `agent_only` — pattern realised by individual agents; group-mode realisation is degenerate
+- `group_only` — pattern requires multi-agent realisation; agent-mode is degenerate
+- `multi_bearer_minimum_two` — pattern requires minimum two bearers; scales upward through specific patterns
+- `multi_bearer_scaling` — pattern realised at multiple scales (interpersonal through international) with structurally analogous form at each
+- `both` — pattern admits both agent and group realisation with different consequences
+
+**`scaling_patterns`** — Optional list of atlas_ids of more specific scaled patterns. For Reciprocity, this would include atlas_ids for Kinship Reciprocity, Market Reciprocity, Civic Reciprocity, etc. — if those entries exist. Each scaled pattern is itself a pattern entry composed in part of the general pattern.
+
+---
+
+<a id="pattern-profile-coherence"></a>
+### 2.4 Profile-Coherence Fields
+
+The framework's six dimensions of profile-coherence are each their own field. Each takes a character value from the profile-coherence character vocabulary.
+
+**`substrate_fit`** — Character value: `high`, `moderate`, `low`, `mixed`, `conditional`. Describes how well the pattern's substrate dependencies are met under typical operating conditions.
+
+**`modulation_responsibility`** — Character value as above. Describes whether the pattern's modulation of lower-stratum patterns is supportive, distorting, or mixed.
+
+**`internal_compositional_coherence`** — Character value as above. Required only for patterns with internal composition; omitted otherwise. Distinct from `compositional_character` in Section 2.2 (which describes the type of internal composition); this dimension assesses its coherence quality.
+
+**`field_compatibility`** — Character value. Describes how well the pattern's field-propagation is compatible with the fields it typically operates in.
+
+**`bearer_adequacy`** — Character value. Describes whether the pattern's bearer requirements are typically met.
+
+**`dispositional_consistency`** — Character value. Describes whether the pattern's dispositions cohere into a recognisable shape.
+
+**`profile_coherence_notes`** — A short prose field summarising the overall profile-coherence assessment. This is where the relations between dimensions are noted (e.g., "high internal compositional coherence does not compensate for low modulation responsibility in this pattern").
+
+---
+
+<a id="pattern-persistence"></a>
+### 2.5 Persistence Character Fields
+
+**`persistence_character`** — One value from the persistence vocabulary:
+- `unbounded` — pattern's persistence is not structurally limited; it can be sustained indefinitely under suitable conditions
+- `bounded_by_substrate_exhaustion` — pattern persists by drawing on substrate it does not replenish; eventually exhausts
+- `bounded_by_counter_pattern_formation` — pattern produces conditions that generate organised opposition
+- `bounded_by_internal_dissonance` — pattern persists despite internal interference; eventually internal interference exceeds its compensatory mechanisms
+- `conditional` — persistence depends substantially on conditions external to the pattern itself
+
+**`persistence_conditions`** — A short prose field describing the conditions under which persistence holds and the conditions under which it fails.
+
+---
+
+<a id="pattern-dispositions"></a>
+### 2.6 Dispositions
+
+**`dispositions`** — A list of structured disposition entries. Each disposition has:
+- `name` — short noun phrase describing the disposition (e.g., "tends to stabilise when balanced")
+- `description` — one sentence describing the disposition
+- `conditions` — when the disposition holds; when it fails (optional but recommended)
+
+Dispositions are structured but their content is prose-like. The structure ensures that dispositions are addressable individually rather than buried in prose.
+
+---
+
+<a id="pattern-degradation-conditions"></a>
+### 2.7 Degradation Conditions
+
+The earlier draft of this schema included a `failure_modes` field. It has been **removed**. Failure mode was a loose category that bundled together three structurally different things, and the bundling reproduced — inside the new structured architecture — exactly the prose-era smearing the architecture was meant to eliminate. A reader of a pattern entry would be reading about the pattern and then, under "failure modes," would suddenly be reading about a *different pattern* (clientelism where reciprocity was), or about a *value-flow event* (the moment of capture), as if these were properties of the pattern under analysis. They are not.
+
+What `failure_modes` bundled is now decomposed into three destinations, only one of which stays in the pattern entry:
+
+**Destination 1 — Degradation conditions (stay in the pattern entry).** The conditions under which the pattern's *own* realisation weakens or ceases are genuinely about the pattern. They belong here, in the field below. Reciprocity weakening when its trust-substrate is depleted is a fact about reciprocity.
+
+**Destination 2 — Displacement by another standing pattern (becomes a relation record).** When a different *standing* pattern occupies the space where this pattern was, that other pattern has its own entry, and the relationship between them is a relation record (`opposition` with mode `displacement`, or `substitution`). Clientelism displacing reciprocity is not a "failure mode of reciprocity"; it is a distinct standing pattern in a displacement relation, captured in the relation layer (Section 3), not in this pattern's entry.
+
+**Destination 3 — Value-flow configurations (held for the dynamics half of the framework).** Diversions, captures, extractions, parasitism, betrayal — these are not standing patterns and not properties of the pattern they afflict. They are *value-flow configurations*: descriptions of how value is being moved, diverted, or starved through the connections between patterns, typically mediated by a load-bearing agent. "Asymmetric capture" of reciprocity is a value-flow configuration (value diverted on a maintained premise), not a property of reciprocity. These do not yet have a home in the schema because the framework's dynamics half (value-flow) has not yet been constructed. Until it is, they are noted in the narrative articulation as observations awaiting the dynamics layer, **not** forced into a structured field that would misrepresent their nature.
+
+**`degradation_conditions`** — A list of structured entries describing conditions under which the pattern's own realisation weakens or ceases. Each entry has:
+- `name` — short noun phrase identifying the condition (e.g., "substrate depletion")
+- `description` — one to three sentences describing how the pattern's realisation degrades under this condition
+- `conditions` — what brings this degradation condition about (optional)
+
+The test for what belongs here: does the entry describe *this pattern's own realisation weakening*, or does it describe *a different pattern appearing* or *value being diverted*? Only the first belongs in `degradation_conditions`. The second belongs in a relation record. The third is held for the dynamics half.
+
+Note that structural-type analogies (which the old `failure_modes` field captured through the `structural_type_analogue` sub-field) are relations between patterns and belong in the relation layer as `structural_type_analogy` relation records (Section 3), not as a sub-field of a pattern's degradation conditions.
+
+---
+
+<a id="pattern-lifecycle"></a>
+### 2.8 Lifecycle Metadata
+
+**`canon_declared`** — Date string (ISO format), present only when status is Canon. Records when Canon was declared.
+
+**`last_revised`** — Date string of last substantive revision.
+
+**`revision_history`** — A list of revision entries, each with date, version, and short description. Allows traceability of how the pattern entry has evolved.
+
+---
+
+<a id="pattern-example"></a>
+### 2.9 Example Pattern Entry Structure
+
+The following illustrates the schema's frontmatter for the Reciprocity pattern (abbreviated for example):
+
+```yaml
+---
+atlas_id: VA-REC-001
+title: Reciprocity
+primary_stratum: social
+secondary_strata: [biological]
+mode_of_realisation: >
+  Multi-agent coordination through value-given-and-returned across time,
+  realised when bearers in mutual orientation sustain ongoing exchange that
+  maintains the relation rather than completing it.
+status: Draft
+version: 0.1
+type: Atlas Entry
+
+constituents:
+  - VA-GIV-001  # Giving
+  - VA-EXP-001  # Expectation-of-return
+  - VA-TRA-001  # Tracking
+  - VA-TRU-001  # Trust
+  - VA-SAN-001  # Sanctioning
+compositional_character: consonant
+
+bearer_mode: multi_bearer_scaling
+scaling_patterns:
+  - VA-KIR-001  # Kinship Reciprocity
+  - VA-MKR-001  # Market Reciprocity
+  - VA-CIR-001  # Civic Reciprocity
+
+substrate_fit: high
+modulation_responsibility: conditional
+internal_compositional_coherence: high
+field_compatibility: conditional
+bearer_adequacy: high
+dispositional_consistency: high
+profile_coherence_notes: >
+  Profile-coherence is high when the pattern is well-realised but shifts
+  substantially when captured by power asymmetry, where internal coherence
+  remains high but modulation responsibility and field compatibility decrease.
+
+persistence_character: conditional
+persistence_conditions: >
+  Unbounded persistence when well-realised; bounded by substrate exhaustion
+  when captured by power asymmetry, with structural type analogous to coercion.
+
+dispositions:
+  - name: Stabilises when balanced
+    description: >
+      Reciprocity reinforces itself when giving and returning are perceived
+      as proportionate across the parties.
+  - name: Degrades when systematically unbalanced
+    description: >
+      Accumulated imbalance produces either exit from the relation or
+      transformation into a different pattern (extraction, charity, tribute).
+  # ... additional dispositions
+
+degradation_conditions:
+  - name: Substrate depletion
+    description: >
+      Reciprocity weakens when its substrate patterns (trust, recognition)
+      are depleted; in conditions of acute distrust it fails to initiate.
+  - name: Constituent failure
+    description: >
+      When one constituent (tracking, sanctioning, trust) fails, the pattern's
+      own realisation becomes vulnerable and degrades over time.
+  # ... additional degradation conditions
+  #
+  # NOTE: "Asymmetric capture" is NOT listed here. It is a value-flow
+  # configuration (value diverted on a maintained premise), not a degradation
+  # of reciprocity's own realisation. It is held for the dynamics half of the
+  # framework. The structural-type analogy to coercion is a relation record
+  # (REL-STA-REC-COE-001), not a sub-field here.
+
+canon_declared: null
+last_revised: 2026-01-15
+revision_history:
+  - date: 2026-01-15
+    version: 0.1
+    description: Initial draft written under unified framework
+---
+```
+
+The accompanying narrative articulation follows the frontmatter as MDX content.
+
+---
+
+<a id="section-3-relation-record-schema"></a>
+## 3. Relation Record Schema
+
+A relation record is a typed edge connecting two patterns (or a pattern and a field-position-type). Each relation record is its own artifact, stored separately from pattern entries. Multiple relation records can exist between the same two patterns when they stand in multiple distinct relations.
+
+---
+
+<a id="relation-required-fields"></a>
+### 3.1 Required Fields
+
+**`relation_id`** — Unique identifier following the convention `REL-[TYPE]-[SOURCE]-[TARGET]-NNN` where TYPE is a short type code, SOURCE and TARGET are atlas_ids or vocabulary terms, and NNN is a sequence number. Example: `REL-SUB-REC-TRU-001` for the substrate-dependence relation from Reciprocity to Trust.
+
+**`relation_type`** — One value from the relation type controlled vocabulary (Section 5.2). Determines the directionality character and the required type-specific fields.
+
+**`source`** — Atlas_id of the source pattern. For asymmetric directional relations, this is the pattern from which the relation originates (the depending pattern in substrate-dependence, the modulating pattern in modulation, the composed pattern in composition). For symmetric relations, this is one of the two patterns; the source-target distinction is conventional.
+
+**`target`** — Atlas_id of the target pattern, or in the case of `field_relative_effect` relations, a value from the field-position-type controlled vocabulary.
+
+**`character`** — One value from the character controlled vocabulary appropriate to the relation type (Section 5.3). Modulation relations take character values (`supportive`, `distorting`, `corrective`); substrate-dependence relations take character values (`strong`, `weak`, `conditional`); composition relations take character values (`consonant`, `dissonant`); etc. **Required for relation types that have a single dominant character. Optional for relation types that use multi-dimensional characterisation through type-specific fields — specifically `binding` (which uses `quality`, `strength`, `durability`, `directionality` as a set of dimensions rather than reducing to a single character value).**
+
+**`conditions`** — A short prose field describing when the relation holds and when it fails. Conditions are essential because most relations are not unconditional; they depend on the realisation state of one or both patterns.
+
+**`status`** — Lifecycle status: `Draft`, `Reviewed`, `Canon`, `Deprecated`.
+
+**`version`** — Numeric version.
+
+---
+
+<a id="relation-type-specific"></a>
+### 3.2 Type-Specific Optional Fields
+
+Different relation types have additional fields:
+
+**Substrate-dependence (`type: substrate_dependence`)**:
+- `stratum_distance` — Integer indicating how many strata apart the source and target are. Direct substrate (one stratum down) has distance 1; cascaded substrate has higher distance.
+- `cascaded_through` — List of atlas_ids if the substrate dependence is mediated through intermediate patterns. For Reciprocity's dependence on biological memory through specific biological substrate patterns.
+
+**Modulation (`type: modulation`)**:
+- `modulation_kind` — One of `supportive`, `distorting`, `corrective` (replaces the `character` field in modulation relations; or supplements it).
+- `cascaded` — Boolean indicating whether the modulation reaches its target directly (one stratum down) or through cascaded modulation across intermediate strata.
+
+**Composition (`type: composition`)**:
+- `constituent_role` — Optional short noun phrase describing what role this constituent plays in the composed pattern (e.g., "tracking mechanism", "sanctioning structure").
+
+**Field-relative-effect (`type: field_relative_effect`)**:
+- The target is a field-position-type vocabulary term rather than a pattern atlas_id.
+- `effect_polarity` — One of `positive`, `negative`, `mixed`, `neutral`. The effect's polarity from the perspective of the position.
+- `effect_description` — Short prose describing the specific effect at this position.
+
+**Structural-type-analogy (`type: structural_type_analogy`)**:
+- `signature_name` — Name of the structural signature that the two patterns share (e.g., "internally_consonant_externally_dissonant", "bounded_by_substrate_exhaustion_with_counter_pattern_formation").
+- `signature_dimensions` — List of profile-coherence dimensions where the patterns share character.
+
+**Opposition (`type: opposition`)**:
+- `opposition_mode` — One of `displacement` (one pattern's realisation displaces the other from the shared field), `incompatibility` (the patterns cannot co-exist in shared bearers), `correction` (one pattern corrects the other's misrepresentation).
+
+**Substitution (`type: substitution`)**:
+- `substitution_conditions` — Conditions under which one pattern substitutes for the other (e.g., "coercion substitutes for reciprocity when value-alignment among bearers has failed").
+
+**Binding (`type: binding`) — v0.5, formerly flagged as candidate**:
+- `directionality` — One of `directional` (one pattern feeds another's flow but not vice versa), `bidirectional` (each pattern feeds the other's flow), or `coordinated` (multiple patterns feed one, or one feeds multiple). Directionality is multi-dimensional rather than reducing to a single character value.
+- `quality` — One of `high` (the binding amplifies value through the coupling, supporting both patterns' coherent operation), `low` (the binding dissipates value through the coupling, distorting one or both patterns), or `conditional` (quality is set by what the source pattern is bound to or by what configuration the binding is part of). Replaces the generic `character` field for binding relations.
+- `strength` — One of `tight`, `moderate`, `loose`, or `variable`. Indicates how substantially the binding shapes both patterns' operation.
+- `durability` — One of `standing` (persistently operative), `contingent` (operative only under specific conditions), `standing_but_conditional` (persistently operative while conditions hold), or other type-specific value indicating the binding's durability profile.
+- `binding_kind` — One of `amplification-recruitment` (the source pattern's coordinative structure enables the target to recruit additional flow from the field; power's bindings characteristically have this kind) or `cost-source` (the target pattern's flow is leveraged as substrate by the source; coercion's bindings characteristically have this kind). Open vocabulary; further kinds may surface as further patterns are stress-tested. See §5.3 for the binding_kind controlled vocabulary.
+- `companion_relation` — Optional. Atlas_id-style identifier of the companion binding record in another pattern's folder when one exists. Used when the same coupling has analytical content from both sides (e.g., REL-BND-POW-COE-001 in power's folder has companion_relation: REL-BND-COE-PWR-001 in coercion's folder). Asymmetric companions are permitted; not every binding requires records on both sides. The companion_relation field makes the two-sided structure explicit while preserving the folder convention.
+
+The framework's binding primitive is articulated in detail in the dynamics framework specification (`unified-framework-dynamics-task-2.mdx` §2.2). The schema commits the relation type and its fields; the framework articulates the analytical content.
+
+---
+
+<a id="relation-directionality"></a>
+### 3.3 Directionality Metadata
+
+The relation type carries directionality character implicit in its type code. For schema-level handling:
+
+`substrate_dependence` — asymmetric directional (source depends on target)
+`modulation` — asymmetric directional (source modulates target)
+`composition` — asymmetric directional (target is constituent of source)
+`field_relative_effect` — asymmetric directional (source produces effect at target position)
+`field_co_occurrence` — symmetric (no source-target distinction)
+`structural_type_analogy` — symmetric (no source-target distinction)
+`opposition` — symmetric or asymmetric depending on `opposition_mode`
+`substitution` — asymmetric directional (source substitutes for target)
+`binding` — variable directionality (set per record by the `directionality` field: directional, bidirectional, or coordinated). Companion records in two patterns' folders describe the same coupling from each pattern's analytical perspective and are linked through the `companion_relation` field.
+
+For symmetric relations, the source-target ordering is conventional. Tools querying the graph should respect the relation type's directionality character.
+
+---
+
+<a id="relation-example"></a>
+### 3.4 Example Relation Records
+
+Substrate-dependence relation from Reciprocity to Trust:
+
+```yaml
+---
+relation_id: REL-SUB-REC-TRU-001
+relation_type: substrate_dependence
+source: VA-REC-001  # Reciprocity
+target: VA-TRU-001  # Trust
+character: strong
+conditions: >
+  Reciprocity depends on Trust as substrate when sustained relation extends
+  across time-frames where immediate return is delayed. In contexts of
+  acute distrust, reciprocity fails to initiate.
+stratum_distance: 0  # Both at social stratum (intra-stratum substrate)
+status: Draft
+version: 0.1
+---
+```
+
+Structural-type-analogy relation between Reciprocity (in its captured value-flow configuration) and Coercion:
+
+```yaml
+---
+relation_id: REL-STA-REC-COE-001
+relation_type: structural_type_analogy
+source: VA-REC-001  # Reciprocity (captured form)
+target: VA-COE-001  # Coercion
+character: strong
+conditions: >
+  When reciprocity is captured by power asymmetry, its profile-coherence
+  signature matches coercion's: internally consonant constituents producing
+  systematic external asymmetry, persisting on borrowed substrate.
+signature_name: internally_consonant_externally_dissonant
+signature_dimensions:
+  - internal_compositional_coherence
+  - modulation_responsibility
+  - persistence_character
+status: Draft
+version: 0.1
+---
+```
+
+Field-relative-effect relation from Coercion to the "subjected" field-position-type:
+
+```yaml
+---
+relation_id: REL-FRE-COE-SUB-001
+relation_type: field_relative_effect
+source: VA-COE-001  # Coercion
+target: subjected  # Field-position-type from controlled vocabulary
+character: strong_negative
+effect_polarity: negative
+effect_description: >
+  At subjected field-positions, coercion produces stress accumulation,
+  loss of agency, value-loss, and eventually resistance, exit, or sabotage.
+conditions: >
+  Effect holds under typical coercive operation; intensity varies with
+  duration of subjection and absence of alternative coordination.
+status: Draft
+version: 0.1
+---
+```
+
+Binding relation from Power to Reciprocity (amplification-recruitment binding):
+
+```yaml
+---
+relation_id: REL-BND-POW-REC-001
+relation_type: binding
+source: VA-POW-001  # Power
+target: VA-REC-001  # Reciprocity
+directionality: bidirectional
+quality: high
+strength: tight_when_active
+durability: standing_but_conditional
+binding_kind: amplification-recruitment
+conditions: >
+  Power bound to reciprocity is power deployed to protect, enforce, and sustain
+  reciprocal arrangements. The binding is bidirectional: power feeds
+  reciprocity's flow at scale (amplifying reciprocity beyond what unaided
+  reciprocity could sustain), and reciprocity feeds power's flow (legitimacy
+  and voluntary compliance reduce power's enforcement costs and replenish its
+  reserves). The binding's quality is high: both patterns' coherent operation
+  is supported. Durability is standing-but-conditional: persists while
+  reciprocity's voluntary compliance continues to replenish power's reserves
+  and while power's enforcement continues to protect reciprocity from
+  defection.
+status: Draft
+version: 0.3
+---
+```
+
+Binding relation from Coercion to Power (cost-source binding, companion to the above example's source pattern):
+
+```yaml
+---
+relation_id: REL-BND-COE-PWR-001
+relation_type: binding
+source: VA-COE-001  # Coercion
+target: VA-POW-001  # Power
+directionality: directional
+quality: low
+strength: variable
+durability: contingent_on_cost_source_capacity
+binding_kind: cost-source
+companion_relation: REL-BND-POW-COE-001
+conditions: >
+  Power is one possible cost-source for coercion: it can supply the credible
+  contingent cost coercion leverages. Quality is low: the binding distorts
+  power's coherent operation (power tightly bound to coercion erodes its own
+  substrate) and feeds coercion which is internally-consonant-externally-
+  dissonant in the field. Durability is contingent on power's continued
+  capacity to supply the credible cost. Note the companion_relation field
+  cross-references REL-BND-POW-COE-001 in power's folder, which describes
+  the same coupling from power's analytical perspective.
+status: Draft
+version: 0.3
+---
+```
+
+---
+
+<a id="section-4-narrative-conventions"></a>
+## 4. Narrative Articulation Conventions
+
+Narrative articulation is the prose layer that accompanies a pattern entry. It lives in the same file (as MDX content following the frontmatter) but is conceptually separate from the structured pattern entry data.
+
+---
+
+<a id="narrative-purpose"></a>
+### 4.1 Purpose and Scope
+
+Narrative articulation contains:
+
+The pattern's character — what kind of thing the pattern is, in language that gives it texture and recognisability.
+
+Examples drawn from observed reality — concrete instantiations of the pattern in cultures, contexts, history, biology, or elsewhere.
+
+Analytical context — placement of the pattern in relation to other patterns, history of the project's analysis of this pattern, debates or uncertainties about its character.
+
+Interpretive depth — the kind of nuance that resists reduction to fields without loss.
+
+What narrative articulation does *not* contain:
+
+Duplicate description of structured pattern entry data. If the pattern entry says `primary_stratum: social`, the narrative does not also state this; it can discuss why the placement is structural, but it does not repeat the data.
+
+Duplicate description of relation records. If a relation record specifies that Reciprocity depends on Trust as substrate, the narrative does not list "Reciprocity depends on Trust" as a structural claim. It can discuss what this dependence means, give examples of how it operates, and contextualise it — but the dependence itself is in the relation record.
+
+Structural claims that have not been captured in structured data. If the narrative makes a structural claim about the pattern, the claim should also appear in the pattern entry or in a relation record. Narrative is not a place for structural claims that escape the graph.
+
+---
+
+<a id="narrative-cross-reference"></a>
+### 4.2 Cross-Reference Conventions
+
+Narrative articulation cross-references the structured layer through specific conventions:
+
+Pattern references use the pattern's title with the atlas_id in parentheses on first mention: "Justice (VA-JUS-001)" first, then "Justice" thereafter.
+
+Relation references cite the relation_id when discussing a specific relation in detail: "The substrate-dependence relation (REL-SUB-REC-TRU-001) describes the conditions under which Reciprocity requires Trust."
+
+Profile-coherence references discuss the character of dimensions without restating the values: "Reciprocity's profile-coherence is high in most dimensions but conditional in modulation-responsibility, depending on whether the pattern is well-realised or captured."
+
+Cross-references should be sparing. Narrative is prose, and excessive cross-referencing makes prose unreadable. Reference the structured data when discussing it directly; do not parenthetically tag every claim.
+
+---
+
+<a id="narrative-sections"></a>
+### 4.3 Recommended Narrative Sections
+
+Narrative articulation is freer in structure than pattern entries, but the following recommended sections capture what most pattern analysis needs:
+
+**Character of the pattern** — what kind of thing this is, in two to four paragraphs. The character is what makes the pattern recognisable to a reader who has not encountered it analytically.
+
+**Examples and instantiations** — concrete cases drawn from cultures, contexts, history, or other domains where the pattern can be observed. Examples should be representative, not cherry-picked. Aim for two to five examples that span different scales or contexts.
+
+**Comparison with related patterns** — discussion of how this pattern relates to others, particularly patterns it is commonly confused with or that share a structural-type signature. The structured relations are in relation records; the narrative discusses what those relations mean and why they matter.
+
+**Persistence and degradation in concrete cases** — discussion of how the pattern persists in well-realised cases and how it degrades in captured or failing cases. The structured persistence character is in the pattern entry; the narrative gives concrete texture to what persistence and degradation look like.
+
+**Disputed character or edge cases** — discussion of cases where the pattern's identity is debatable, where the analysis is provisional, where the framework is being stretched. Honesty about analytical uncertainty belongs in narrative, not in structured fields.
+
+**Position in the project's intellectual development** — brief context on how this pattern has been treated in the project, what changes the framework has produced in its analysis, what remains open. Optional but useful for entries that have evolved substantially.
+
+---
+
+<a id="narrative-governance"></a>
+### 4.4 Narrative Governance
+
+Narrative articulations evolve more freely than pattern entries or relation records. Revisions to narrative do not require Canon governance approval in the same way that revisions to structured fields do. The narrative may be updated when:
+
+The structured data has changed and the narrative needs to reflect the new structural understanding.
+
+New examples become available that illustrate the pattern better.
+
+The project's intellectual development has produced new context relevant to the pattern.
+
+Errors of fact or interpretation are discovered.
+
+Substantive narrative changes (rewriting major sections, introducing new analytical claims) should be reviewed for consistency with the structured data, but the review is lighter than Canon promotion. The narrative serves the structured data; when it falls out of synchronisation with that data, the narrative is what gets corrected.
+
+---
+
+<a id="section-5-controlled-vocabularies"></a>
+## 5. Controlled Vocabularies
+
+Controlled vocabularies are the constrained value lists that structured fields draw from. They are highly stable and changes to them require explicit governance approval because they affect every pattern entry and relation record that references them.
+
+---
+
+<a id="vocab-strata"></a>
+### 5.1 Stratum Names
+
+The framework recognises four strata:
+
+- `physical`
+- `biological`
+- `social`
+- `intellectual`
+
+This vocabulary is stable and not subject to extension. Adding or removing strata would require fundamental framework revision.
+
+---
+
+<a id="vocab-relation-types"></a>
+### 5.2 Relation Types
+
+The framework recognises the following relation types:
+
+- `substrate_dependence` — Asymmetric directional. Source pattern depends on target pattern as substrate.
+- `modulation` — Asymmetric directional. Source pattern modulates target pattern's realisation. Carries `modulation_kind` from sub-vocabulary.
+- `composition` — Asymmetric directional. Target pattern is a constituent of source pattern.
+- `field_co_occurrence` — Symmetric. Two patterns share a field and their realisations affect each other through field-propagation.
+- `field_relative_effect` — Asymmetric directional. Source pattern produces specific effects at the target field-position-type.
+- `structural_type_analogy` — Symmetric. Two patterns share a structural-type signature.
+- `opposition` — Variable directionality. Two patterns are structurally opposed; specific `opposition_mode` field clarifies the relation.
+- `substitution` — Asymmetric directional. Source pattern substitutes for target pattern under specific conditions.
+- `binding` *(v0.5, COMMITTED — formerly flagged as candidate in §9 v0.4)* — Variable directionality. Source pattern is coupled to target pattern through a value-flow relation; the source pattern's flow either feeds the target or is fed by it depending on `binding_kind`. Surfaced by the Power migration (where power's amplification of its bound patterns could not be cleanly typed) and confirmed by the Coercion stress-test (where the four cost-source relations were reclassified from substrate-dependence to binding with binding_kind: cost-source). Carries the binding_kind sub-vocabulary, the directionality/quality/strength/durability multi-dimensional characterisation, and the optional companion_relation cross-reference. Defined in detail in §3.2 (Type-Specific Optional Fields) and articulated analytically in the dynamics framework v1.2 §2.2.
+- `distinction` *(FLAGGED — PROVISIONAL)* — Symmetric. Two patterns are commonly conflated but are dissociable: each can exist where the other is absent. Surfaced by the Power migration, where power's distinctions from authority, legitimacy, violence, and influence had to be forced into `opposition`, `substrate_dependence`, and `composition` types that did not fit cleanly. A dedicated relation for "X is dissociable from Y" would record these cleanly, since many fundamental patterns are defined partly by what they are commonly confused with. **This type is flagged as provisional and is not yet committed.** It is recorded here as a candidate awaiting a decision: whether dissociability is genuinely its own relation type or a special case of an existing one. Until committed, distinction-relations continue to be recorded using the closest existing type with a note.
+
+The `cost_source` candidate relation type, flagged in earlier schema versions, has been **resolved in v0.5**: cost-source relationships are correctly captured as `binding` with `binding_kind: cost-source`, not as a separate relation type. The binding primitive with binding_kind as a sub-vocabulary handles the structural distinction without requiring two relation types.
+
+This vocabulary is more extensible than strata; additional relation types may be added if the framework discovers them. Additions require explicit framework-level approval. The `distinction` type above is flagged provisional precisely to mark that it has not yet received such approval.
+
+---
+
+<a id="vocab-character-modulation"></a>
+### 5.3 Character Values
+
+Different relation types take different character vocabularies. The character field's allowed values depend on the relation type.
+
+**Modulation character** (`modulation_kind` field):
+- `supportive` — Modulation strengthens the target pattern's realisation.
+- `distorting` — Modulation forces target into configurations that compromise its mode of being.
+- `corrective` — Modulation surfaces where target's profile-coherence is weak, without directly shaping realisation.
+- `conditional` — The character of the modulation is set by what the source pattern is bound to, not by the source pattern itself, and cannot be fixed as supportive/distorting/corrective without resolving the binding. Surfaced by the Power migration: power modulates biological and intellectual substrate supportively or distortingly depending on what it is bound to. The conditional value is structurally honest for any pattern whose downward modulation depends on a binding; the binding itself is a value-flow coupling that the dynamics half will formalise.
+
+**Substrate-dependence character**:
+- `strong` — Pattern cannot be realised without this substrate
+- `weak` — Pattern's realisation is sensitive to but not strictly dependent on this substrate
+- `conditional` — Substrate dependence varies with the pattern's specific scaled form or context
+
+**Composition character**:
+- `consonant` — Constituent supports the composed pattern's realisation
+- `dissonant` — Constituent interferes with the composed pattern's realisation
+- `conditionally_consonant` — Character depends on the constituent's own state
+
+**Field-relative-effect character**:
+- `strong_positive`, `positive`, `neutral`, `negative`, `strong_negative`, `mixed`
+
+**Structural-type-analogy character**:
+- `strong` — Patterns share the signature across multiple dimensions
+- `moderate` — Patterns share the signature in some dimensions but not all
+- `partial` — Patterns share aspects of the signature
+
+**Opposition character**:
+- `displacement` — One pattern's realisation displaces the other from shared field
+- `incompatibility` — Patterns cannot co-exist in shared bearers
+- `correction` — One pattern corrects the other's misrepresentation
+
+**Binding character** (v0.5 — multi-dimensional, replaces single `character` field for binding relations):
+
+For the `quality` field on binding records:
+- `high` — Binding amplifies value through the coupling, supporting both patterns' coherent operation
+- `low` — Binding dissipates value through the coupling, distorting one or both patterns
+- `conditional` — Quality is set by what the source pattern is bound to elsewhere, or by what configuration the binding is part of; cannot be fixed as high/low without resolving the configuration
+
+For the `directionality` field on binding records:
+- `directional` — One pattern feeds the other's flow but not vice versa
+- `bidirectional` — Each pattern feeds the other's flow
+- `coordinated` — Multiple patterns feed one, or one feeds multiple (used for portfolio bindings)
+
+For the `strength` field on binding records:
+- `tight` — Significant flow coupling; the binding substantially shapes both patterns' operation
+- `moderate` — Notable but not dominant flow coupling
+- `loose` — Minimal flow coupling
+- `variable` — Strength shifts with conditions
+
+For the `durability` field on binding records:
+- `standing` — Persistently operative across the patterns' operation
+- `contingent` — Operative only under specific conditions; dissolves when conditions change
+- `standing_but_conditional` — Persistently operative while conditions hold; characteristic of high-quality bindings that have stable operating ranges
+- `contingent_and_degrading` — Operative under conditions while actively degrading the conditions; characteristic of low-quality bindings consuming their own substrate
+
+**Binding kind** (v0.5 — sub-vocabulary for the `binding_kind` field on binding records):
+
+- `amplification-recruitment` — The source pattern's coordinative structure enables the target pattern to recruit additional flow from the field beyond what the target could coordinate alone. The source pattern's flow makes the recruitment possible; the target pattern does the work; the field supplies the additional flow. Power's bindings (to reciprocity, legitimacy, authority, etc.) are characteristically of this kind.
+- `cost-source` — The target pattern's flow is leveraged as substrate by the source pattern. The target's flow is recruited into the source's mechanism rather than being amplified by the source. Coercion's bindings (to power, guilt, shame, obligation) are characteristically of this kind.
+
+This vocabulary is open: further binding kinds may surface as further patterns are tested. Identified to date through the power and coercion stress-tests. Additional kinds (e.g., `substrate-recruitment` if structurally distinct from the above two) may be added as stress-tests of further patterns surface them. Additions follow the vocabulary governance in §5.9.
+
+---
+
+<a id="vocab-field-positions"></a>
+### 5.4 Field-Position-Types
+
+The framework recognises the following field-position-types, drawn from the Circle/Ripple theory:
+
+- `internal` — Those whose value experience depends on the bearer
+- `allied` — Those with active committed engagement in the bearer's success
+- `neutral` — Those without active commitment to the bearer
+- `hostile` — Those whose interests run counter to the bearer
+- `subjected` — Those upon whom a pattern is applied as target, whose value experience is shaped by being the object of the pattern's operation. Distinct from `hostile` (whose interests run counter to the bearer regardless of whether the pattern is applied to them): the subjected position is specifically the application-target. Added via the Coercion migration, where the subjected position is where the pattern's cost is borne and from which counter-pattern formation originates. The target-directed pattern class — coercion, predation, sanction-as-punishment, and similar — uses this position. (Pending formal governance confirmation; drafted and applied in migration 01.)
+
+Additional field-position-types may be added as the framework's analysis matures (e.g., `dependent` for caregiving-specific analysis, `peer` for symmetric coordination contexts). Extensions to this vocabulary require explicit governance approval and should be motivated by structural reality, not by case-specific convenience.
+
+---
+
+<a id="vocab-bearer-modes"></a>
+### 5.5 Bearer Modes
+
+The framework recognises:
+
+- `agent_only` — Pattern realised by individual agents; group-mode is degenerate.
+- `group_only` — Pattern requires multi-agent realisation; agent-mode is degenerate.
+- `multi_bearer_minimum_two` — Pattern requires minimum two bearers; scales upward through specific patterns.
+- `multi_bearer_scaling` — Pattern realised at multiple scales with structurally analogous form at each.
+- `both` — Pattern admits both agent and group realisation with different consequences.
+
+---
+
+<a id="vocab-profile-coherence-character"></a>
+### 5.6 Profile-Coherence Character Values
+
+For all six profile-coherence dimensions:
+
+- `high` — Dimension shows strong coherence under typical operating conditions
+- `moderate` — Dimension shows some coherence but with notable limitations
+- `mixed` — Dimension's character varies substantially across realisation modes
+- `low` — Dimension shows weak coherence
+- `conditional` — Dimension's character depends on the pattern's realisation state (e.g., well-realised vs. captured)
+- `not_applicable` — Dimension does not apply to this pattern (e.g., internal_compositional_coherence for non-composed patterns)
+
+---
+
+<a id="vocab-persistence-character"></a>
+### 5.7 Persistence Character Values
+
+- `unbounded` — Persistence not structurally limited
+- `bounded_by_substrate_exhaustion` — Pattern persists on borrowed substrate
+- `bounded_by_counter_pattern_formation` — Pattern produces conditions generating opposition
+- `bounded_by_internal_dissonance` — Pattern persists despite internal interference
+- `conditional` — Persistence depends substantially on external conditions
+
+---
+
+<a id="vocab-composition-character"></a>
+### 5.8 Composition Character Values (Pattern Entry Field)
+
+Distinct from the relation-record composition character (Section 5.3) — this is the *pattern entry's* field describing its own internal composition's overall character:
+
+- `consonant` — Constituents mutually support each other's realisation
+- `dissonant` — Constituents mutually interfere with each other's realisation
+- `mixed` — Some constituents are consonant, others dissonant
+- `internally_consonant_externally_dissonant` — Constituents support each other internally but the composed pattern interferes with broader field patterns
+- `conditional` — Character depends on the pattern's realisation state
+
+---
+
+<a id="vocab-governance"></a>
+### 5.9 Vocabulary Governance
+
+Controlled vocabularies are stable but extensible. Adding a new value requires:
+
+A specific structural need that existing vocabulary cannot capture
+Explicit governance approval
+Documentation of the new value's meaning, criteria for using it, and relation to existing values
+
+Removing values from a vocabulary is more difficult and requires migration of all entries that use the removed value to alternative vocabulary.
+
+The vocabularies themselves should be specified in a single, version-controlled document separate from the schema specification, so that vocabulary additions can be tracked without requiring schema revision.
+
+---
+
+<a id="section-6-graph-operations"></a>
+## 6. Graph Operations Enabled
+
+The four-artifact architecture transforms what the Atlas can be analysed for. This section describes the operations that become possible once data is structured.
+
+---
+
+<a id="graph-basic"></a>
+### 6.1 Basic Navigation
+
+Starting at any pattern, a reader can traverse:
+
+- *Substrate chain* — descend through patterns this one depends on, then patterns those depend on, down to the physical stratum
+- *Modulation effects* — see what patterns this one modulates and how, including cascaded modulation through intermediate strata
+- *Constituent expansion* — see what patterns compose this one and what they themselves are composed of
+- *Compositional containers* — see what larger patterns this one is a constituent of
+- *Field relations* — see what patterns share fields with this one and what the effects are
+- *Structural-type cousins* — see what patterns share a structural-type signature with this one
+
+These traversals are not abstract possibilities; they are direct queries against the relation graph that the relation records constitute.
+
+---
+
+<a id="graph-typed-views"></a>
+### 6.2 Typed Views
+
+Queries can produce typed views of the Atlas:
+
+- "All patterns with internally-consonant-externally-dissonant composition" — returns a signature-based view that surfaces patterns sharing the cancer/coercion/captured-reciprocity structural type, regardless of stratum.
+
+- "All corrective modulation relations" — returns a relation-based view that surfaces the intellectual stratum's distinctive operation on lower strata, again regardless of which specific patterns are involved.
+
+- "All patterns at the social stratum with bounded persistence" — returns a stratum-and-persistence-based view, useful for analysing which social patterns are structurally unstable.
+
+- "All patterns that participate in compositional clusters involving Justice" — returns a compositional view of the governance complex without requiring those patterns to be individually identified by hand.
+
+Each typed view becomes a routine query rather than an exhaustive read of the Atlas.
+
+---
+
+<a id="graph-consistency"></a>
+### 6.3 Consistency Checking
+
+Structured data permits consistency checks that prose does not:
+
+- Patterns listing other patterns as substrate should have those substrate patterns existing in the Atlas. Missing references indicate either uncatalogued substrate patterns that should be created, or substrate claims that should be reconsidered.
+
+- Reverse relations should be consistent. If Pattern-A claims Pattern-B as substrate, the graph should produce Pattern-A in views of Pattern-B's dependents. Asymmetric inconsistency suggests either incomplete data or analysis error.
+
+- Stratum-distance in substrate-dependence should match actual stratum positions of source and target. Inconsistency suggests misclassification.
+
+- Structural-type-analogy relations should have consistent signature-name and signature-dimensions across the relations sharing that signature. The signature should be a coherent description of what the patterns share.
+
+These checks can be automated and run continuously, surfacing inconsistencies for human review.
+
+---
+
+<a id="graph-visualisation"></a>
+### 6.4 Visualisation
+
+The graph can be visualised in multiple ways:
+
+- *Substrate trees* — Hierarchical views showing what each pattern depends on, with stratum-coloured nodes and substrate-character edges.
+
+- *Compositional clusters* — Views showing which patterns are composed of which, revealing the structural architecture of larger-scale patterns.
+
+- *Stratum slices* — Views showing all patterns at a given stratum with their intra-stratum relations.
+
+- *Signature constellations* — Views grouping patterns by shared structural-type signatures, useful for cross-stratum analysis.
+
+- *Field-position heatmaps* — Visualisations of how patterns produce different effects at different field-positions, with the asymmetry of effects made visible.
+
+Visualisations are not core to the framework, but the structured data enables them in ways that prose does not.
+
+---
+
+<a id="graph-future"></a>
+### 6.5 Future Inferences
+
+Once the graph is structured, certain inferences become possible:
+
+- Substrate-chain dependence analysis: if Pattern-A depends on Pattern-B and Pattern-B depends on Pattern-C, then Pattern-A's persistence is conditionally dependent on Pattern-C's.
+
+- Modulation-cascade tracing: if Pattern-A modulates Pattern-B and Pattern-B modulates Pattern-C, then Pattern-A's modulation reaches Pattern-C through cascade, with character determined by both modulation kinds.
+
+- Structural-type prediction: a pattern with internally-consonant-externally-dissonant composition is likely to have bounded persistence, even if persistence character has not been independently assessed.
+
+These inferences are framework predictions rather than empirical claims. They are useful for surfacing analytical claims that the framework would predict but that have not yet been documented, prompting further analysis.
+
+---
+
+<a id="section-7-migration"></a>
+## 7. Migration from the Existing Atlas
+
+The existing Atlas entries combine all four artifact types in a single document. Migrating to the new architecture requires careful work; this section describes the approach.
+
+---
+
+<a id="migration-principles"></a>
+### 7.1 Migration Principles
+
+Migration should be:
+
+- *Lossless* — No analytical content should be lost in the migration. Everything in the existing entries either becomes structured data or remains as narrative articulation.
+- *Incremental* — Migration proceeds entry by entry, not all at once. Each migrated entry can be reviewed independently.
+- *Reversible during transition* — Until the new architecture is operationally adopted, migration is provisional; existing entries remain available alongside migrated ones.
+- *Faithful to the framework* — Migration is an occasion to apply the framework to each entry, which may surface refinements the existing entry did not have. These refinements should be made, not avoided for the sake of fidelity to old prose.
+
+---
+
+<a id="migration-process"></a>
+### 7.2 Migration Process
+
+For each existing Atlas entry:
+
+**Step 1: Read the existing entry against the framework.** Identify the pattern's structural properties (primary stratum, mode of realisation, internal composition, profile-coherence, dispositions, degradation conditions, persistence character). Where the existing entry lists "failure modes," sort each one into its proper destination: degradation conditions (stay with the pattern), displacement by another standing pattern (becomes a relation record), or value-flow configuration (held for the dynamics half, noted in narrative).
+
+**Step 2: Draft the pattern entry frontmatter.** Populate the structured fields from the analysis. Where the existing entry is ambiguous, mark the field as draft and note the ambiguity.
+
+**Step 3: Identify relation claims.** Read the existing entry for claims about relations to other patterns. Each such claim becomes a candidate relation record.
+
+**Step 4: Draft relation records.** Create one relation record per identified relation. Where target patterns do not yet have their own entries, note them for future entry creation; the relation record may reference them as placeholders or be deferred.
+
+**Step 5: Extract narrative articulation.** What remains of the existing entry after structured data has been extracted is the narrative articulation. Edit it for the conventions in Section 4 (no duplication of structured data, proper cross-references).
+
+**Step 6: Review for consistency.** Check that the structured pattern entry and the narrative articulation are mutually consistent. Run automated consistency checks against the graph.
+
+**Step 7: Submit for governance review.** The migrated entry returns to Draft status pending review. Canon governance applies separately to pattern entries, relation records, and narrative articulation.
+
+---
+
+<a id="migration-priorities"></a>
+### 7.3 Migration Priorities
+
+Migration should be prioritised by:
+
+Patterns whose framework analysis has already been validated through stress testing (Beauty, Justice, Coercion, Truth, Reciprocity).
+
+Patterns that other entries depend on (substrate patterns, common modulation targets). Migrating these first allows downstream entries to use proper atlas_id references rather than placeholders.
+
+Patterns previously named as laws. These should become Atlas entries in their own right; their migration is essential to the laws-removal recommendation.
+
+Patterns at scales not previously catalogued (governance, religion, civilisation, etc.) where the framework's compositional-scale principle enables Atlas entries that the existing law-scaffolding did not support.
+
+---
+
+<a id="section-8-governance"></a>
+## 8. Governance
+
+Each artifact type has its own governance discipline.
+
+---
+
+<a id="gov-pattern-entries"></a>
+### 8.1 Pattern Entry Governance
+
+Pattern entries follow the existing Canon governance pattern, adapted to the new schema:
+
+- *Draft* — Initial entry, structured fields populated, narrative articulated. Pattern entry is in active development.
+- *Reviewed* — Entry has been reviewed against the framework. Structural data is consistent; narrative is coherent.
+- *Canon* — Entry has been promoted to Canon. Structural data is stable; changes require explicit governance.
+- *Deprecated* — Entry has been superseded or removed from active Atlas; preserved as historical record.
+
+Canon promotion requires a Canon Promotion Checklist adapted to the new schema, replacing the existing checklist's law-scoring requirements with framework-primitive coverage requirements.
+
+---
+
+<a id="gov-relation-records"></a>
+### 8.2 Relation Record Governance
+
+Relation records have their own lifecycle similar to pattern entries:
+
+- *Draft* — Initial relation record, fields populated.
+- *Reviewed* — Record reviewed for consistency with pattern entries.
+- *Canon* — Relation promoted to Canon. Stable.
+- *Deprecated* — Relation no longer holds (e.g., pattern character has changed) and is preserved as historical record.
+
+Relation records' Canon status is somewhat looser than pattern entries because relations are easier to revise without affecting the rest of the Atlas. But silent revision of Canon relations is prohibited; revisions require explicit governance.
+
+---
+
+<a id="gov-narrative"></a>
+### 8.3 Narrative Articulation Governance
+
+Narrative articulations have lighter governance:
+
+- Updates to narrative do not require Canon promotion the way structured updates do.
+- Substantial rewrites should be reviewed for consistency with structured data.
+- Narrative cannot make structural claims not captured in structured data; if such claims appear, the structured data is what should be updated.
+
+---
+
+<a id="gov-vocabulary"></a>
+### 8.4 Controlled Vocabulary Governance
+
+Controlled vocabularies require the highest stability. Changes:
+
+- Additions require explicit justification and governance approval.
+- Removals require migration of all entries using removed values.
+- Renames are essentially additions plus deprecations.
+
+Vocabulary changes should be batched into versioned releases of the vocabulary document, not made continuously.
+
+---
+
+<a id="section-9-deferred-and-future"></a>
+## 9. What is Deferred
+
+This specification is the starting architecture, not the final one. The following are explicitly deferred.
+
+**The dynamics half of the framework — CONSTRUCTED in v1.0, REFINED through v1.2.** The framework's dynamics half exists as of dynamics framework v1.2 (`unified-framework-dynamics-task-2.mdx`), constructed after the schema's earlier versions deferred it. The framework articulates six primitives of value-flow (propagation, binding, accumulation, dissipation, modulation-of-flow, cascade), the configurations they compose into (amplification, damping, feedback loops, cycles, value-flow configurations, binding-portfolios), and the temporal dimensions on which value-flow operates. Two stress-tests have been completed (power, coercion) producing four confirmed refinements (binding_kind, binding-portfolio, companion_relation, maintained-premise as temporal-character) and one explicitly articulated methodological discipline (framework-pattern distinction). The candidate primitives the earlier schema versions named (binding, amplification, accumulation) are now committed in the framework, not as candidates.
+
+The schema v0.5 integrates the framework's binding primitive as a committed relation type (§3.2, §5.2, §5.3). Other framework concepts (configurations, temporal dimensions, primitives like accumulation and dissipation) operate at the analytical layer rather than the data layer: they are constructs built from analysing pattern entries and relation records, not artifact types in their own right. The schema does not need to add new artifact types for these; the relation records and pattern entries support their analysis. The framework-pattern distinction discipline (framework v1.2 §9.3) constrains schema additions: pattern-specific analytical content lives in pattern entries, not in framework-level schema vocabulary. Future schema additions should follow this discipline.
+
+What remains genuinely deferred at the schema level:
+
+**Distinction relation type.** Still flagged provisional in §5.2. The Power migration surfaced the structural pattern (power's dissociability from authority, legitimacy, violence, influence); the dynamics framework v1.2 has not resolved whether distinction is its own relation type or a special case of opposition. Decision deferred until further stress-tests surface evidence for or against committing it.
+
+**Fields as cataloguable entities.** The current architecture uses field-position-types as controlled vocabulary terms rather than as full entity records. If the project's analysis later requires field-specific structural records (governance fields with their own histories, value fields with specific bearer constitutions), fields can be promoted to entity status. The transition is incremental: the field-position-type vocabulary becomes a field-entity registry, and existing relation records have their targets updated.
+
+**Inference rules.** The framework's primitives suggest specific inferences (substrate chains, modulation cascades, structural-type predictions, binding-portfolio aggregations). Implementing these as automated inference rules is deferred to future work; the current schema supports the data, but the inference layer is not specified here.
+
+**Visualisation specifications.** The schema enables visualisation but does not specify what visualisations should look like. Visualisation work is deferred; it can build on the schema once data is migrated.
+
+**Tooling.** Concrete tools for creating, editing, validating, and querying the artifacts are deferred. The schema specifies the data; the tooling is implementation work to follow.
+
+**Cross-language considerations.** If the project later supports multiple languages, the artifact types will need internationalisation conventions. Deferred for now; the project is currently English-language.
+
+**Versioning conventions.** Major and minor version increments for artifacts need clearer conventions than this specification provides. Defer to a separate versioning policy.
+
+**Folder-per-pattern versus centralised relations folder.** The folder-per-pattern convention (§1.3) was confirmed in May 2026 with the understanding that the question may be revisited as the atlas grows. The companion_relation field on binding records (§3.2) handles the duplicate-record concern at small scale through cross-referencing; if the scale increases substantially, the convention should be revisited.
+
+The specification is intentionally minimal in scope. It defines the architecture; subsequent work fills in the operational details. The architecture should be tested through migration of a few exemplar patterns before being committed to broadly. With the dynamics framework now constructed and two patterns (power, coercion) migrated through the dynamics stress-test process, the schema's foundational architecture is substantially confirmed; broader migration can proceed, with continued attention to whether further patterns surface schema gaps.
+
+---
+
+## Revision Notes
+
+**v0.3 (2026-05-25)** — Integrated learnings from reference migrations 01–02 (Coercion, Power), without disturbing the architecture:
+
+- *`conditional` modulation_kind value* (§5.3) — added. Surfaced by the Power migration: a pattern whose downward modulation character is set by what it is bound to (rather than by the pattern itself) cannot be assigned a fixed supportive/distorting/corrective value. Structurally honest for any binding-dependent modulation.
+- *`subjected` field-position-type* (§5.4) — added (pending formal governance confirmation). Surfaced by the Coercion migration: the application-target position, distinct from `hostile`. Used by the target-directed pattern class (coercion, predation, sanction-as-punishment).
+- *`distinction` relation type* (§5.2) — added but **flagged provisional, not committed**. Surfaced by the Power migration, where power's dissociability from authority, legitimacy, violence, and influence was forced awkwardly into existing relation types. Records "X is commonly conflated with Y but is dissociable from it." Awaits a decision on whether dissociability is its own relation type or a special case.
+- *Candidate dynamics primitives named* (§9) — strengthened the dynamics-half deferral to record binding, amplification, and accumulation as candidate primitives surfaced by the Power migration, and to document the binding-relation gap as the strongest evidence the dynamics half is needed. Nothing about the dynamics half is specified or committed; the primitives are recorded as candidates only.
+
+No artifact type, required field, or committed relation type was changed. The `failure_modes` removal (v0.2) and the four-artifact architecture (v0.1) are preserved intact. Two relation-layer additions (`distinction`, `binding`) are surfaced but neither is committed.
+
+**v0.4 (2026-05-26)** — Added production file layout and folder convention (§1.3):
+
+- Each pattern is a folder named by atlas_id, containing `pattern.mdx` (structured frontmatter + narrative) and a `relations/` subfolder of individual `.yaml` files (one per relation record).
+- Relation records live in the **source pattern's folder** — the pattern from which the relation originates. For symmetric relations, the record lives in the alphabetically-earlier atlas_id's folder.
+- Each relation record exists in exactly one folder, never duplicated.
+- Controlled vocabularies live in a single file in the governance directory, not per-pattern.
+- Replaces the flat file-per-pattern layout used by the existing Atlas.
+
+No schema field, relation type, or controlled vocabulary was changed. This is a file-layout convention, not a data-model change.
+
+**v0.5 (2026-05-31)** — Integrated the dynamics framework v1.2 into the schema. The dynamics framework's binding primitive, previously flagged as a candidate in §9, is now committed as a formal relation type with its full field set and sub-vocabularies. Specific changes:
+
+- *§3.1 Character field requirement adjusted* — Made the `character` field's required-status type-conditional. Required for relation types with a single dominant character (substrate-dependence, modulation, composition, etc.); optional for relation types that use multi-dimensional characterisation through type-specific fields (specifically `binding`).
+- *§3.2 Binding type-specific fields added* — `directionality` (directional/bidirectional/coordinated), `quality` (high/low/conditional), `strength` (tight/moderate/loose/variable), `durability` (standing/contingent/standing_but_conditional/contingent_and_degrading), `binding_kind` (amplification-recruitment/cost-source, open vocabulary), `companion_relation` (optional cross-reference to companion binding-record in another pattern's folder).
+- *§3.3 Directionality metadata updated* — Added binding as variable directionality (set per record by the `directionality` field), with note on companion records and the companion_relation cross-reference.
+- *§3.4 Example records added* — Two binding examples: REL-BND-POW-REC-001 (amplification-recruitment binding from power's stress-test) and REL-BND-COE-PWR-001 (cost-source binding from coercion's stress-test, demonstrating companion_relation usage).
+- *§5.2 Binding committed as formal relation type* — Promoted from §9 candidate status. The two stress-tests (power, coercion) demonstrated the binding primitive's adequacy and surfaced its sub-vocabulary (binding_kind). The `distinction` relation type remains flagged as provisional — its resolution awaits further stress-tests.
+- *§5.2 cost_source candidate RESOLVED* — Earlier schema versions flagged cost_source as a candidate relation type. With binding committed and binding_kind as a sub-vocabulary value, cost-source relationships are correctly captured as binding with binding_kind: cost-source. The candidate is resolved as a binding_kind value rather than a separate type.
+- *§5.3 Binding character and binding_kind sub-vocabularies added* — Multi-dimensional binding character (quality, directionality, strength, durability vocabularies) and the binding_kind sub-vocabulary (amplification-recruitment, cost-source).
+- *§9 Dynamics-half deferral updated* — The deferral is reframed from "the dynamics half does not yet exist" to "the dynamics half exists (framework v1.2) and the schema integrates its committed relation types." The schema does not add artifact types for the framework's analytical-layer concepts (configurations, temporal dimensions) because these are analytical constructs built from pattern entries and relation records, not data-architecture artifacts. The framework-pattern distinction discipline (framework v1.2) constrains future schema additions. The folder convention question is recorded as deferred-for-revisit, with the companion_relation field handling the duplicate-record concern at small scale.
+
+No artifact type, foundational structure, or controlled vocabulary in §5.1, §5.4, §5.5, §5.6, §5.7, §5.8, or §5.9 was changed. The four-artifact architecture is preserved intact. The existing relation types (substrate_dependence, modulation, composition, field_co_occurrence, field_relative_effect, structural_type_analogy, opposition, substitution) and their fields are preserved without modification. The v0.5 changes are additive (new relation type, new fields, new sub-vocabularies) and a single field-status adjustment (character: required becomes type-conditional). The provisional distinction relation type is preserved as flagged.
+
+---
+
+*End of Schema Specification (Draft v0.5)*
